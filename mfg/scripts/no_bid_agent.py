@@ -205,33 +205,29 @@ def main():
         print("\n-- write-back --")
         client, ctx = get_graph()
         with ctx:
-            from datahub_agent_context.mcp_tools import save_document, update_description
+            from datahub.sdk import DataHubClient, Document
+            from datahub_agent_context.mcp_tools import update_description
             for res in results:
                 urn = res["urn"]
-                content = (
-                    f"## {res['fixture']}\n\n"
-                    f"**Decision:** {res['decision']}\n"
-                    f"**Confidence:** {res['confidence']}\n\n"
-                    f"**Reasoning:** {res['reason']}\n"
-                    f"**Risk categories:** {', '.join(res['risk_categories']) or 'none'}\n"
-                    f"**Review gates:** {', '.join(res['review_gates']) or 'none'}\n"
-                    f"**Missing info:** {'; '.join(res['missing_info']) or 'none'}"
-                )
-                save_document(
-                    document_type="Decision",
+                # Native upsert: deterministic id -> idempotent, one canonical doc per fixture
+                doc = Document.create_document(
+                    id=f"decision-{res['fixture']}",
                     title=f"[no-bid] {res['fixture']}: {res['decision']}",
-                    content=content,
-                    related_assets=[urn],
-                )
-                update_description(
-                    entity_urn=urn,
-                    operation="append",
-                    description=(
-                        f"\n\n**Agent decision ({res['decision']}, {res['confidence']})** — "
-                        f"{res['reason']}"
+                    text=(
+                        f"## {res['fixture']}\n\n"
+                        f"**Decision:** {res['decision']}\n"
+                        f"**Confidence:** {res['confidence']}\n\n"
+                        f"**Reasoning:** {res['reason']}\n"
+                        f"**Risk categories:** {', '.join(res['risk_categories']) or 'none'}\n"
+                        f"**Review gates:** {', '.join(res['review_gates']) or 'none'}\n"
+                        f"**Missing info:** {'; '.join(res['missing_info']) or 'none'}"
                     ),
+                    subtype="Decision",
+                    related_assets=[urn],
+                    show_in_global_context=True,
                 )
-                print(f"  wrote Decision doc + desc -> {urn} ({res['decision']})")
+                client.entities.upsert(doc)
+                print(f"  upserted Decision doc {doc.urn} -> {urn} ({res['decision']})")
     print("\nDONE")
 
 if __name__ == "__main__":

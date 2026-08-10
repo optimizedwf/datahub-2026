@@ -113,14 +113,14 @@ def main():
         }
         cc = data.get("capability_class", {})
         for k, v in cc.items():
-            custom["capability_" + k] = json.dumps(v) if not isinstance(v, str) else v
+            custom["capability_" + k] = json.dumps(v, ensure_ascii=False) if not isinstance(v, str) else v
         missing = data.get("missing_info", [])
         if missing:
-            custom["missing_info"] = json.dumps(missing)
+            custom["missing_info"] = json.dumps(missing, ensure_ascii=False)
         risks = data.get("expected_dfm_risks", [])
         if risks:
             custom["dfm_risk_count"] = str(len(risks))
-            custom["dfm_risks"] = json.dumps(risks)
+            custom["dfm_risks"] = json.dumps(risks, ensure_ascii=False)
 
         desc = data.get("description") or data.get("name", f.stem)
         upstreams = []
@@ -152,11 +152,11 @@ def main():
             "source": "fixtures/kernels/" + f.name,
         }
         rc = data.get("expected_risk_categories", [])
-        if rc: custom["risk_categories"] = json.dumps(rc)
+        if rc: custom["risk_categories"] = json.dumps(rc, ensure_ascii=False)
         rg = data.get("expected_review_gates", [])
-        if rg: custom["review_gates"] = json.dumps(rg)
+        if rg: custom["review_gates"] = json.dumps(rg, ensure_ascii=False)
         mi = data.get("missing_info", [])
-        if mi: custom["missing_info"] = json.dumps(mi)
+        if mi: custom["missing_info"] = json.dumps(mi, ensure_ascii=False)
         s = data.get("safety", {})
         for k, v in s.items(): custom["safety_" + k] = str(v)
         if not args.dry_run:
