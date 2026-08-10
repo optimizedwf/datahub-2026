@@ -103,7 +103,7 @@ DataHub / datahub-agent-context · SQLite · Python · Docker · any [OI]-compat
 
 ## Checklist before submit
 
-- [x] Demo video `datahub_demo_final.mp4` (**1:53**, 113.2s, 1920×1080 h264+AAC, 27.7 MB) — factory-shop story: owned-assets home → RFQ arrives (Inconel 718 · qty 2, Properties table) → no-bid decision doc written back → terminal run (reads live graph, writes back) → lineage (graph remembers) → search (prior decision searchable) → A/B bars (metadata 0.95 vs plain 0.70, +0.25, frozen 2026-08-05) → architecture (read·decide·write back) → CTA with public repo URL. Real UI + terminal + professional TTS voiceover. Kimi vision-critic gate: **SHIP certified** (3 roast rounds, all blockers fixed; `docs/roast_v43_SHIP.md`).
+- [x] Demo video `datahub_demo_final.mp4` (**2:11**, 131.5s, 1920×1080 h264+AAC, 29.9 MB) — factory-shop story: owned-assets home → RFQ arrives (Inconel 718 · qty 2, Properties table) → no-bid decision doc written back → terminal run (reads live graph, writes back) → lineage (graph remembers) → search (prior decision searchable) → A/B bars (metadata 0.95 vs plain 0.70, +0.25, frozen 2026-08-05) → architecture (read·decide·write back) → CTA with public repo URL. Real UI + terminal, voiced by the **Mr Chow persona voice** (`en-US-GuyNeural`, the exact voice from the Mr Chow show pipeline), polished card graphics (gradients/glows/glass). Kimi vision-critic gate: **SHIP certified** (3 roast rounds; `docs/roast_v43_SHIP.md`), human preview in progress.
 - [x] GitHub repo — `github.com/optimizedwf/datahub-2026` (PUBLIC — live) (Apache-2.0, README, Makefile, tests, CI); upstream PR **#96**
 - [x] Contribute-back PR — `datahub-project/analytics-agent #96`
 - [x] `EVAL.json` metadata 0.95 (frozen 2026-08-05); mfg eval 22/22 PASS
