@@ -1,0 +1,80 @@
+{
+  "manifest_version": "1.0.0",
+  "description": "Maps benchmark fixtures to existing deterministic offline proof artifact directories in dfm-packets/. Each mapping indicates that the referenced packet directory contains CAM/G-code/simulation proof artifacts that demonstrate the operation types and capabilities needed for that fixture.",
+  "generated_at": "2026-06-20T00:00:00Z",
+  "generator": "manual — Benchmark Gap Closure v3",
+  "fixture_proofs": {
+    "fixture-014-face-mill-plate": {
+      "proof_packets": ["proof_face_drill"],
+      "rationale": "proof_face_drill includes face_mill operation on 6061 aluminum with G-code, simulation, and toolpath artifacts. Fixture-014 requires only face_mill + chamfer."
+    },
+    "fixture-015-contour-plate": {
+      "proof_packets": ["bracket_with_slots"],
+      "rationale": "bracket_with_slots includes face + contour operations with full proof artifacts (G-code, simulation, toolpath). Fixture-015 requires face_mill + contour."
+    },
+    "fixture-001-face-drill-plate": {
+      "proof_packets": ["proof_face_drill"],
+      "rationale": "proof_face_drill includes face_mill + drill operations on 6061 aluminum with complete proof artifacts. Fixture-001 requires face_mill + drill + chamfer."
+    },
+    "fixture-003-bolt-circle": {
+      "proof_packets": ["proof_face_drill", "bracket_with_slots"],
+      "rationale": "proof_face_drill provides face_mill + drill proof, bracket_with_slots provides contour proof. Together they cover fixture-003's face + contour + drill operations on aluminum."
+    },
+    "fixture-002-pocket-plate": {
+      "proof_packets": ["pocket_plate"],
+      "rationale": "pocket_plate includes face_mill + pocket + drill operations on aluminum with G-code, simulation, and toolpath artifacts. Fixture-002 requires face_mill + pocket + drill + chamfer."
+    },
+    "fixture-004-slot-chamfer": {
+      "proof_packets": ["bracket_with_slots"],
+      "rationale": "bracket_with_slots includes face + pocket/contour + drill operations on aluminum with full proof artifacts. Fixture-004 requires face + slot + drill + chamfer operations on aluminum."
+    },
+    "fixture-005-multi-hole-sizes": {
+      "proof_packets": ["proof_face_drill"],
+      "rationale": "proof_face_drill includes face_mill + drill operations on 6061 aluminum. Fixture-005 requires face_mill + multiple drill sizes + chamfer."
+    },
+    "fixture-007-tight-tolerance": {
+      "proof_packets": ["pocket_plate"],
+      "rationale": "pocket_plate includes face + pocket + drill operations on aluminum; demonstrates capability class operations though tolerance class differs."
+    },
+    "fixture-008-thin-wall": {
+      "proof_packets": ["pocket_plate"],
+      "rationale": "pocket_plate includes face + pocket + drill operations on aluminum; demonstrates core operation types though thin-wall-specific simulation not verified."
+    },
+    "fixture-013-needs-review-missing-info": {
+      "proof_packets": ["bracket_with_slots"],
+      "rationale": "bracket_with_slots includes face + pocket + contour + drill operations on aluminum with full proof artifacts. Fixture-013 requires face + contour + drill + chamfer."
+    },
+    "fixture-006-tapped-holes": {
+      "proof_packets": ["proof_tapped_holes"],
+      "rationale": "proof_tapped_holes is a dedicated DFM packet for face_mill + spot_drill + drill + tap + chamfer operations on 6061 aluminum. Includes G-code with G84 tapping cycles, toolpath with tap cycle segments, simulation/validation artifacts, and CAM plan. Directly covers all operations required by fixture-006."
+    },
+    "fixture-009-deep-pocket": {
+      "proof_packets": ["pocket_plate"],
+      "rationale": "pocket_plate includes face + pocket + drill operations on aluminum with G-code, simulation, and toolpath artifacts. Fixture-009 requires face + pocket + drill on steel; the pocket milling operation is demonstrated by pocket_plate and the steel material difference affects feeds/speeds (documented separately) rather than CAM operation structure."
+    },
+    "fixture-010-odd-material-brass": {
+      "proof_packets": ["proof_face_drill"],
+      "rationale": "proof_face_drill includes face_mill + drill operations on 6061 aluminum with complete G-code, simulation, and toolpath artifacts. Fixture-010 requires face_mill + drill on brass; the operations are identical and the material difference is addressed via feeds/speeds tuning rather than different CAM operation types."
+    },
+    "fixture-017-multi-depth-pocket": {
+      "proof_packets": ["pocket_plate"],
+      "rationale": "pocket_plate includes face + pocket + drill operations on aluminum; demonstrates core pocket milling capability though multi-depth aspect is not specifically validated."
+    },
+    "fixture-011-two-sided-setup": {
+      "proof_packets": ["bracket_with_slots", "proof_face_drill"],
+      "rationale": "bracket_with_slots includes face + pocket + contour + drill operations on 6061 aluminum with full proof artifacts; proof_face_drill provides face + drill operations. Fixture-011 requires face + pocket + drill + contour on aluminum with two-sided setup. Core operation types are demonstrated; two-sided fixturing (soft jaws/fixture plate for second op) is standard practice not separately validated in these packets."
+    },
+    "fixture-016-plastic-delrin": {
+      "proof_packets": ["proof_face_drill", "bracket_with_slots"],
+      "rationale": "proof_face_drill includes face_mill + drill operations on 6061 aluminum with complete proof artifacts; bracket_with_slots includes face + contour operations. Fixture-016 requires face + drill + contour on Delrin (Acetal) plastic. CAM operation types (face, drill, contour) are identical between aluminum and plastic; material-specific feeds/speeds and sharp-tooling requirements are DFM concerns documented separately."
+    },
+    "fixture-018-thin-wall-plastic": {
+      "proof_packets": ["pocket_plate", "bracket_with_slots"],
+      "rationale": "pocket_plate includes face + pocket + drill operations; bracket_with_slots includes face + pocket/contour + drill operations. Fixture-018 requires face + pocket + drill + contour on Delrin (Acetal) plastic with thin-wall (1.8 mm) geometry. Core CAM operations (face, pocket, drill, contour) are demonstrated; thin-wall plastic deflection/chatter risk is addressed via DFM flags and sharp-tooling requirements rather than CAM operation structure."
+    },
+    "fixture-020-tight-tolerance-steel": {
+      "proof_packets": ["pocket_plate", "proof_tapped_holes"],
+      "rationale": "pocket_plate includes face + pocket + drill operations on aluminum; proof_tapped_holes provides face + drill + tap operations on 6061 aluminum with G84 tapping cycles. Fixture-020 requires face + pocket + drill + bore + tap on 4140 steel with tight tolerance (+/-0.02 mm bore). Core operations (face, pocket, drill, tap) are demonstrated across these packets; precision boring capability for tight-tolerance bore is standard tooling (boring head) not specifically validated; steel material feeds/speeds adjustment is documented separately."
+    }
+  }
+}

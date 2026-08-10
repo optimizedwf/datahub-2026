@@ -1,0 +1,43 @@
+# 316 Stainless Steel — Material Profile
+# Conservative default feeds and speeds for CNC milling.
+# ADVISORY ONLY: no controller connection, no production authorization.
+# Qualified machinist review required before any real machining.
+
+material:
+  name: "Stainless Steel 316"
+  grade: "316"
+  family: "stainless"
+
+  hardness_hb: 217
+  tensile_mpa: 580
+
+  recommended_tooling:
+    - carbide
+    - coated_carbide
+
+  feeds_speeds:
+    face_mill:
+      surface_speed_m_per_min: 80
+      feed_per_tooth_mm: 0.05
+      doc_max_mm: 0.9
+
+    end_mill:
+      surface_speed_m_per_min: 60
+      feed_per_tooth_mm: 0.03
+      doc_max_mm: 0.3
+      doc_radial_max_pct: 25
+
+    drill:
+      surface_speed_m_per_min: 35
+      feed_per_rev_mm: 0.07
+      peck_depth_mm: 0.7
+
+  coolant:
+    recommended: "flood"
+    notes: "Flood coolant required. 316 is tougher than 304 — reduce speeds further if chatter or edge wear appears."
+
+  notes:
+    - "316 is more gummy/tough than 304; prefer sharp coated carbide"
+    - "Avoid rubbing to limit work hardening"
+    - "Profile is a conservative planning default, not production authorization"
+    - "ADVISORY ONLY — qualified machinist review required"

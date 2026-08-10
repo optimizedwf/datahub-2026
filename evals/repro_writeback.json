@@ -1,0 +1,67 @@
+{
+  "schema_version": "1",
+  "frozen": "2026-08-05",
+  "best_of": 1,
+  "modes": {
+    "metadata": {
+      "accuracy": 1.0,
+      "n": 3,
+      "details": [
+        {
+          "id": "h1",
+          "dataset": "healthcare",
+          "mode": "metadata",
+          "sql": "SELECT COUNT(*) FROM mart_billing WHERE billing_amount < 0;",
+          "rows": [
+            [
+              1215
+            ]
+          ],
+          "error": null,
+          "attempts": 1,
+          "bench_attempts": 1,
+          "used_metadata": true,
+          "score": 1.0,
+          "gold": "1215",
+          "write_back": "urn:li:document:shared-34ea6184-69eb-470d-964f-693baa910174"
+        },
+        {
+          "id": "h2",
+          "dataset": "healthcare",
+          "mode": "metadata",
+          "sql": "SELECT COUNT(*) FROM mart_demographics WHERE name IS NULL;",
+          "rows": [
+            [
+              555
+            ]
+          ],
+          "error": null,
+          "attempts": 1,
+          "bench_attempts": 1,
+          "used_metadata": true,
+          "score": 1.0,
+          "gold": "555",
+          "write_back": "urn:li:document:shared-8f032ddf-6fbc-4eaa-9e90-f0b7512d7650"
+        },
+        {
+          "id": "h3",
+          "dataset": "healthcare",
+          "mode": "metadata",
+          "sql": "SELECT COUNT(*) FROM mart_demographics WHERE age < 0 OR age > 120;",
+          "rows": [
+            [
+              832
+            ]
+          ],
+          "error": null,
+          "attempts": 1,
+          "bench_attempts": 1,
+          "used_metadata": true,
+          "score": 1.0,
+          "gold": "832",
+          "write_back": "urn:li:document:shared-09a86fc1-b874-4e32-83d7-8441525174f6"
+        }
+      ]
+    }
+  }
+}

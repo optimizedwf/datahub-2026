@@ -1,0 +1,40 @@
+# Steel 4140 — Material Profile
+# Conservative default feeds and speeds for CNC milling
+
+material:
+  name: "Steel 4140"
+  grade: "4140"
+  family: "steel"
+
+  hardness_hb: 300 # Brinell (280-320 pre-hardened)
+  tensile_mpa: 850
+
+  recommended_tooling:
+    - carbide # Only carbide; TiAlN coating recommended
+
+  feeds_speeds:
+    face_mill:
+      surface_speed_m_per_min: 100 # 80-130 m/min carbide, TiAlN coated
+      feed_per_tooth_mm: 0.08 # 0.06-0.12 mm/tooth
+      doc_max_mm: 1.5
+
+    end_mill:
+      surface_speed_m_per_min: 80 # 60-100 m/min carbide, TiAlN coated
+      feed_per_tooth_mm: 0.04 # 0.02-0.06 mm/tooth (per mm diameter)
+      doc_max_mm: 0.4 # Conservative axial DOC
+      doc_radial_max_pct: 35 # % of tool diameter
+
+    drill:
+      surface_speed_m_per_min: 50 # 40-70 m/min carbide, TiAlN coated
+      feed_per_rev_mm: 0.10 # 0.06-0.14 mm/rev
+      peck_depth_mm: 1.0 # Default peck for deep holes
+
+  coolant:
+    recommended: "flood"
+    notes: "Flood coolant required; high-pressure through-tool preferred for deep holes"
+
+  notes:
+    - "4140 is a tough alloy steel; reduced speeds vs 1018 required"
+    - "TiAlN coating on carbide extends tool life significantly"
+    - "Avoid interrupted cuts where possible; pre-heat if very hard (>35 HRC)"
+    - "Surface finish: 1.6-3.2 µm Ra achievable with rigid setup"

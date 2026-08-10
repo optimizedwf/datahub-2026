@@ -1,0 +1,61 @@
+# Default 3-Axis Mill Profile
+# Generic Fanuc / Haas-style VMC
+
+machine:
+  name: "Default 3-Axis VMC"
+  controller: "fanuc_0i" # fanuc_0i, haas_ngc
+  axes: 3
+  units: "mm" # G21
+
+  work_envelope:
+    x_min: 0
+    x_max: 800.0 # mm
+    y_min: -500.0 # mm (negative allows toolpath outside stock)
+    y_max: 500.0 # mm
+    z_min: -300.0
+    z_max: 300.0 # includes tool length
+
+  spindle:
+    max_rpm: 10000
+    min_rpm: 100
+    orientation: "vertical"
+
+  rapid:
+    max_feed_mm_per_min: 15000
+    clearance_plane_mm: 5.0 # Safe Z above part for rapids
+
+  coolant:
+    types: ["flood", "mist", "through_spindle"]
+
+  post_processor:
+    default_modal_states:
+      g21: true # metric
+      g17: true # XY plane
+      g40: true # cutter comp off
+      g80: true # canned cycle cancel
+      g90: true # absolute positioning
+      g94: true # feed per minute
+
+    program_format:
+      start: "%"
+      end: "M30"
+      line_numbers: true
+      line_number_start: 10
+      line_number_increment: 10
+
+  probe:
+    type: "touch"                # touch, laser, non-contact
+    stylus:
+      length_mm: 50.0
+      tip_diameter_mm: 6.0
+    feed_approach_mm_per_min: 100
+    feed_retract_mm_per_min: 2000
+    retract_distance_mm: 5.0
+    max_travel_mm: 20.0
+    output_type: "g10_l2"         # How to set WCS: g10_l2 (G10 L2 Pn)
+    guarded_move: "g38.2"         # G38.2 (standard touch probe)
+
+  safety:
+    max_spindle_rpm: 12000
+    max_feed_mm_per_min: 5000
+    rapid_to_z_first: true # Always move Z before XY when rapiding

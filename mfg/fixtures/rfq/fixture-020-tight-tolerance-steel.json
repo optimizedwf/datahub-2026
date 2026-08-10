@@ -1,0 +1,49 @@
+{
+  "fixture_id": "fixture-020-tight-tolerance-steel",
+  "name": "Tight Tolerance Steel Plate — Needs Review",
+  "capability_class": {
+    "material_group": "steel",
+    "geometry_complexity": "moderate",
+    "tolerance_class": "tight",
+    "operation_types": ["face", "pocket", "drill", "bore", "tap"]
+  },
+  "material": "Steel 4140",
+  "quantity": 15,
+  "tolerance": "+/- 0.02 mm on bore, +/- 0.05 mm general",
+  "finish": "Ra 0.4 um on sealing face, machined elsewhere",
+  "missing_info": [
+    "Thread depth on 6x tapped holes not specified",
+    "Edge break specification missing on internal pockets"
+  ],
+  "expected_setup_class": "single_setup",
+  "expected_setup_count": 1,
+  "expected_operations": [
+    {"operation": "face_mill", "description": "Face mill sealing surface", "tools": ["50mm face mill carbide inserts"]},
+    {"operation": "rough_pocket", "description": "Rough pocket for seal groove", "tools": ["10mm AlTiN end mill"]},
+    {"operation": "finish_pocket", "description": "Finish pocket to dimension", "tools": ["8mm AlTiN end mill"]},
+    {"operation": "drill", "description": "Drill 6x tap drill holes", "tools": ["carbide drills"]},
+    {"operation": "bore", "description": "Bore precision hole to +/- 0.02 mm", "tools": ["precision boring head"]},
+    {"operation": "tap", "description": "Tap 6x threads", "tools": ["thread mill or tap"]},
+    {"operation": "chamfer", "description": "Chamfer all edges", "tools": ["chamfer tool"]}
+  ],
+  "expected_tooling_assumptions": [
+    "AlTiN-coated carbide end mills (8, 10 mm) for 4140 steel",
+    "face mill with carbide inserts",
+    "carbide drills",
+    "precision boring head for tight tolerance bore",
+    "thread mill or tap for 6x threaded holes",
+    "chamfer tool"
+  ],
+  "expected_dfm_risks": [
+    {"severity": "MEDIUM", "category": "tight_tolerance", "message": "+/- 0.02 mm bore requires precision boring — achievable but needs care."},
+    {"severity": "MEDIUM", "category": "missing_info", "message": "Thread depth not specified; may affect tooling selection and cycle time."},
+    {"severity": "LOW", "category": "missing_info", "message": "Edge break specification missing on internal pockets."}
+  ],
+  "expected_quote_decision": "needs_review",
+  "expected_proof_requirement": {
+    "requires_cam_simulation": true,
+    "requires_gcode": true,
+    "requires_toolpath": true,
+    "reason_not_applicable": ""
+  }
+}

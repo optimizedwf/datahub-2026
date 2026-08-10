@@ -1,0 +1,37 @@
+{
+  "fixture_id": "kernel-001-proof-tapped-holes",
+  "name": "Tapped Holes — Aluminum 6061 (Bounded Packet)",
+  "description": "Aluminum 6061 plate with M6x1 tapped holes. Has a linked packet (proof_tapped_holes) demonstrating bounded capability. Expected quote_ready with review gates for thread gage verification.",
+  "material": "Aluminum 6061-T6",
+  "quantity": 60,
+  "tolerance": "+/- 0.1 mm",
+  "finish": "Machined finish, break sharp edges",
+  "due_date": "2026-07-15",
+  "linked_packet_id": "proof_tapped_holes",
+  "feature_summary": "Flat rectangular plate with 8x M6x1 tapped through holes, chamfered openings. Simple 2.5D geometry.",
+  "artifact_refs": [
+    "dfm-packets/proof_tapped_holes/manifest.json",
+    "dfm-packets/proof_tapped_holes/DFM_PACKET.md",
+    "dfm-packets/proof_tapped_holes/output.nc"
+  ],
+  "missing_info": [],
+  "safety": {
+    "advisory_only": true,
+    "machine_execution": false,
+    "paid_order": false,
+    "production_authorization": false
+  },
+  "expected_decision": "quote_ready",
+  "expected_confidence_band": "HIGH",
+  "expected_scope_status": "in_scope",
+  "expected_risk_categories": [
+    "threaded_holes"
+  ],
+  "expected_review_gates": [
+    "setup_review",
+    "tooling_review",
+    "thread_gage_verification",
+    "machinist_review"
+  ],
+  "expected_dfm_findings_count": 1
+}

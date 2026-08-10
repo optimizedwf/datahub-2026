@@ -1,0 +1,45 @@
+{
+  "fixture_id": "fixture-013-needs-review-missing-info",
+  "name": "Bracket with Missing Info — Needs Review",
+  "capability_class": {
+    "material_group": "aluminum",
+    "geometry_complexity": "simple",
+    "tolerance_class": "standard",
+    "operation_types": ["face", "drill", "contour"]
+  },
+  "material": "Aluminum 6061-T6",
+  "quantity": 10,
+  "tolerance": "+/- 0.2 mm",
+  "finish": "Standard machined finish",
+  "missing_info": [
+    "Thread callout on 4x holes unspecified (M6 vs UNC?)",
+    "No edge break note on internal pockets",
+    "Material temper not specified"
+  ],
+  "expected_setup_class": "single_setup",
+  "expected_setup_count": 1,
+  "expected_operations": [
+    {"operation": "face_mill", "description": "Face mill to thickness", "tools": ["50mm face mill"]},
+    {"operation": "contour", "description": "Cut outside profile", "tools": ["10mm end mill"]},
+    {"operation": "drill", "description": "Drill 4x through holes", "tools": ["6mm carbide drill"]},
+    {"operation": "chamfer", "description": "Chamfer edges", "tools": ["chamfer tool"]}
+  ],
+  "expected_tooling_assumptions": [
+    "carbide end mills (6, 10 mm)",
+    "face mill",
+    "carbide drills",
+    "chamfer tool",
+    "thread forming tap (size TBD based on customer clarification)"
+  ],
+  "expected_dfm_risks": [
+    {"severity": "MEDIUM", "category": "missing_info", "message": "Thread type unspecified on 4x holes; cannot select tap tooling."},
+    {"severity": "LOW", "category": "missing_info", "message": "Material temper not specified; assume T6."}
+  ],
+  "expected_quote_decision": "needs_review",
+  "expected_proof_requirement": {
+    "requires_cam_simulation": true,
+    "requires_gcode": true,
+    "requires_toolpath": true,
+    "reason_not_applicable": ""
+  }
+}

@@ -1,0 +1,124 @@
+{
+  "schema_version": "1",
+  "frozen": "2026-08-05",
+  "best_of": 3,
+  "modes": {
+    "metadata": {
+      "accuracy": 0.8333,
+      "n": 6,
+      "details": [
+        {
+          "id": "t1",
+          "dataset": "nyc-taxi-pipeline",
+          "mode": "metadata",
+          "sql": "SELECT MAX(tpep_pickup_datetime) FROM raw_trips;",
+          "rows": [
+            [
+              "2016-03-10 10:48:55"
+            ]
+          ],
+          "error": null,
+          "attempts": 1,
+          "bench_attempts": 1,
+          "used_metadata": true,
+          "score": 1.0,
+          "gold": "2016-03-10",
+          "write_back": "urn:li:document:shared-cd32958f-f14a-4690-8696-4ff47e6075f0; annotated:urn:li:dataset:(urn:li:dataPlatform:sqlite,nyc_taxi.main.raw_trips,PROD)"
+        },
+        {
+          "id": "t2",
+          "dataset": "nyc-taxi-pipeline",
+          "mode": "metadata",
+          "sql": "SELECT MAX(trip_date) FROM mart_daily_summary;",
+          "rows": [
+            [
+              "2016-03-01"
+            ]
+          ],
+          "error": null,
+          "attempts": 1,
+          "bench_attempts": 1,
+          "used_metadata": true,
+          "score": 1.0,
+          "gold": "2016-03-01",
+          "write_back": "urn:li:document:shared-c6af792d-0adc-4843-adf4-2efc38ca35b6; annotated:urn:li:dataset:(urn:li:dataPlatform:sqlite,nyc_taxi.main.mart_daily_summary,PROD)"
+        },
+        {
+          "id": "t3",
+          "dataset": "nyc-taxi-pipeline",
+          "mode": "metadata",
+          "sql": "SELECT \n    (SELECT MAX(DATE(tpep_pickup_datetime)) FROM raw_trips) AS latest_raw_date,\n    (SELECT MAX(trip_date) FROM mart_daily_summary) AS latest_mart_date",
+          "rows": [
+            [
+              "2016-03-10",
+              "2016-03-01"
+            ]
+          ],
+          "error": null,
+          "attempts": 1,
+          "bench_attempts": 3,
+          "used_metadata": true,
+          "score": 0.0,
+          "gold": "9",
+          "write_back": "urn:li:document:shared-cd5ff753-d8db-4bf4-8441-82a5ce072c59; annotated:urn:li:dataset:(urn:li:dataPlatform:sqlite,nyc_taxi.main.mart_daily_summary,PROD)"
+        },
+        {
+          "id": "t4",
+          "dataset": "nyc-taxi-pipeline",
+          "mode": "metadata",
+          "sql": "SELECT trip_date, trip_count FROM mart_daily_summary ORDER BY trip_count ASC LIMIT 1;",
+          "rows": [
+            [
+              "2016-02-25",
+              2
+            ]
+          ],
+          "error": null,
+          "attempts": 1,
+          "bench_attempts": 1,
+          "used_metadata": true,
+          "score": 1.0,
+          "gold": "2016-02-25",
+          "write_back": "urn:li:document:shared-dade087a-361e-403a-86ca-fbc8f4e4bb2d; annotated:urn:li:dataset:(urn:li:dataPlatform:sqlite,nyc_taxi.main.mart_daily_summary,PROD)"
+        },
+        {
+          "id": "t5",
+          "dataset": "nyc-taxi-pipeline",
+          "mode": "metadata",
+          "sql": "SELECT MIN(trip_count) FROM mart_daily_summary;",
+          "rows": [
+            [
+              2
+            ]
+          ],
+          "error": null,
+          "attempts": 1,
+          "bench_attempts": 1,
+          "used_metadata": true,
+          "score": 1.0,
+          "gold": "2",
+          "write_back": "urn:li:document:shared-d11f686a-0f34-47f1-8d4e-3ea0d842c632; annotated:urn:li:dataset:(urn:li:dataPlatform:sqlite,nyc_taxi.main.mart_daily_summary,PROD)"
+        },
+        {
+          "id": "t6",
+          "dataset": "nyc-taxi-pipeline",
+          "mode": "metadata",
+          "sql": "SELECT \n    (SELECT COUNT(*) FROM staging_trips) AS staging_trips,\n    (SELECT COUNT(*) FROM raw_trips) AS raw_trips;",
+          "rows": [
+            [
+              208675,
+              250000
+            ]
+          ],
+          "error": null,
+          "attempts": 1,
+          "bench_attempts": 1,
+          "used_metadata": true,
+          "score": 1.0,
+          "gold": "208675 vs 250000",
+          "write_back": "urn:li:document:shared-999e8468-3f05-4873-83ec-d3d7107fb2a5; annotated:urn:li:dataset:(urn:li:dataPlatform:sqlite,nyc_taxi.main.staging_trips,PROD)"
+        }
+      ]
+    }
+  }
+}

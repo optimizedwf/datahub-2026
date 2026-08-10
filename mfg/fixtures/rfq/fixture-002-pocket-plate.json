@@ -1,0 +1,40 @@
+{
+  "fixture_id": "fixture-002-pocket-plate",
+  "name": "Pocket Plate — Aluminum",
+  "capability_class": {
+    "material_group": "aluminum",
+    "geometry_complexity": "moderate",
+    "tolerance_class": "standard",
+    "operation_types": ["face", "pocket", "drill"]
+  },
+  "material": "Aluminum 6061-T6",
+  "quantity": 50,
+  "tolerance": "+/- 0.1 mm",
+  "finish": "Machined finish, break sharp edges",
+  "missing_info": [],
+  "expected_setup_class": "single_setup",
+  "expected_setup_count": 1,
+  "expected_operations": [
+    {"operation": "face_mill", "description": "Face mill stock to thickness", "tools": ["50mm face mill"]},
+    {"operation": "rough_pocket", "description": "Rough rectangular pocket", "tools": ["10mm end mill"]},
+    {"operation": "finish_pocket", "description": "Finish pocket walls and floor", "tools": ["6mm end mill"]},
+    {"operation": "drill", "description": "Drill 4x corner holes 5mm", "tools": ["5mm carbide drill"]},
+    {"operation": "chamfer", "description": "Chamfer pocket edges and holes", "tools": ["chamfer tool"]}
+  ],
+  "expected_tooling_assumptions": [
+    "standard 2-flute carbide end mill set (3, 6, 10 mm)",
+    "50 mm face mill",
+    "carbide drill set",
+    "chamfer tool"
+  ],
+  "expected_dfm_risks": [
+    {"severity": "LOW", "category": "internal_corner_radius", "message": "Pocket corners at R3 mm; standard end mill can achieve."}
+  ],
+  "expected_quote_decision": "quote_ready",
+  "expected_proof_requirement": {
+    "requires_cam_simulation": true,
+    "requires_gcode": true,
+    "requires_toolpath": true,
+    "reason_not_applicable": ""
+  }
+}

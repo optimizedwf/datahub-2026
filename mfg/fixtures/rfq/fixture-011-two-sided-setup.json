@@ -1,0 +1,44 @@
+{
+  "fixture_id": "fixture-011-two-sided-setup",
+  "name": "Two-Sided Setup Mount — Aluminum",
+  "capability_class": {
+    "material_group": "aluminum",
+    "geometry_complexity": "complex",
+    "tolerance_class": "standard",
+    "operation_types": ["face", "pocket", "drill", "contour"]
+  },
+  "material": "Aluminum 6061-T6",
+  "quantity": 30,
+  "tolerance": "+/- 0.05 mm between features on opposite sides",
+  "finish": "Machined finish, break edges",
+  "missing_info": ["Datums not explicitly defined on drawing"],
+  "expected_setup_class": "two_setup",
+  "expected_setup_count": 2,
+  "expected_operations": [
+    {"operation": "op1_face_mill", "description": "Op1: Face mill bottom surface", "tools": ["50mm face mill"]},
+    {"operation": "op1_drill", "description": "Op1: Drill and tap mounting holes", "tools": ["spot drill", "5mm drill", "M6 tap"]},
+    {"operation": "op2_face_mill", "description": "Op2: Face mill top surface to thickness", "tools": ["50mm face mill"]},
+    {"operation": "op2_pocket", "description": "Op2: Mill pocket on top face", "tools": ["10mm end mill"]},
+    {"operation": "op2_drill", "description": "Op2: Drill through holes", "tools": ["8mm carbide drill"]},
+    {"operation": "op2_chamfer", "description": "Op2: Chamfer all edges", "tools": ["chamfer tool"]}
+  ],
+  "expected_tooling_assumptions": [
+    "carbide end mills (6, 10 mm)",
+    "face mill",
+    "carbide drills (5 mm, 8 mm)",
+    "M6 tap",
+    "chamfer tool",
+    "soft jaws or fixture plate for second op"
+  ],
+  "expected_dfm_risks": [
+    {"severity": "MEDIUM", "category": "two_sided_setup", "message": "Features on both sides require second op with soft jaws or fixture plate."},
+    {"severity": "LOW", "category": "missing_info", "message": "Datums not explicitly defined; inspection plan may need clarification."}
+  ],
+  "expected_quote_decision": "needs_review",
+  "expected_proof_requirement": {
+    "requires_cam_simulation": true,
+    "requires_gcode": true,
+    "requires_toolpath": true,
+    "reason_not_applicable": ""
+  }
+}

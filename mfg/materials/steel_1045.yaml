@@ -1,0 +1,41 @@
+# Steel 1045 — Material Profile
+# Conservative default feeds and speeds for CNC milling.
+# ADVISORY ONLY: no controller connection, no production authorization.
+
+material:
+  name: "Steel 1045"
+  grade: "1045"
+  family: "steel"
+
+  hardness_hb: 180
+  tensile_mpa: 585
+
+  recommended_tooling:
+    - carbide
+    - HSS
+
+  feeds_speeds:
+    face_mill:
+      surface_speed_m_per_min: 160
+      feed_per_tooth_mm: 0.10
+      doc_max_mm: 1.8
+
+    end_mill:
+      surface_speed_m_per_min: 140
+      feed_per_tooth_mm: 0.045
+      doc_max_mm: 0.45
+      doc_radial_max_pct: 40
+
+    drill:
+      surface_speed_m_per_min: 80
+      feed_per_rev_mm: 0.11
+      peck_depth_mm: 1.2
+
+  coolant:
+    recommended: "flood"
+    notes: "Flood coolant recommended for chip control and heat."
+
+  notes:
+    - "1045 is medium-carbon steel; slightly slower than 1018"
+    - "Profile is a conservative planning default, not production authorization"
+    - "ADVISORY ONLY — qualified machinist review required"

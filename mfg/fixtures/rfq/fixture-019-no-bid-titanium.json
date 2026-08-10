@@ -1,0 +1,47 @@
+{
+  "fixture_id": "fixture-019-no-bid-titanium",
+  "name": "Titanium Aerospace Bracket — No Bid",
+  "capability_class": {
+    "material_group": "exotic",
+    "geometry_complexity": "complex",
+    "tolerance_class": "tight",
+    "operation_types": ["face", "pocket", "contour", "drill", "thread_mill"]
+  },
+  "material": "Titanium Ti-6Al-4V",
+  "quantity": 5,
+  "tolerance": "+/- 0.025 mm on critical features, +/- 0.1 mm general",
+  "finish": "Ra 0.8 um on mating faces, machined elsewhere",
+  "missing_info": [
+    "Heat treat specification not provided",
+    "Inspection/certification requirements not defined",
+    "Raw material cert not included"
+  ],
+  "expected_setup_class": "needs_review",
+  "expected_setup_count": 2,
+  "expected_operations": [
+    {"operation": "face_mill", "description": "Face mill with specialized Ti tooling", "tools": ["Ti-capable face mill"]},
+    {"operation": "rough_pocket", "description": "Rough pocket with reduced speeds/feeds for Ti", "tools": ["10mm AlTiN end mill"]},
+    {"operation": "finish_pocket", "description": "Finish pocket to tight tolerance", "tools": ["8mm AlTiN end mill"]},
+    {"operation": "drill", "description": "Drill through holes with peck cycles", "tools": ["Ti-capable carbide drills"]},
+    {"operation": "thread_mill", "description": "Thread mill M8 holes", "tools": ["M8 thread mill"]}
+  ],
+  "expected_tooling_assumptions": [
+    "AlTiN-coated carbide end mills (8, 10 mm) for titanium",
+    "Ti-capable face mill with specialized inserts",
+    "Ti-capable carbide drills with peck cycle programming",
+    "M8 thread mill",
+    "Through-spindle coolant required for Ti machining"
+  ],
+  "expected_dfm_risks": [
+    {"severity": "HIGH", "category": "material_difficulty", "message": "Ti-6Al-4V is difficult to machine — requires rigid setup, low speeds, high coolant pressure."},
+    {"severity": "MEDIUM", "category": "tight_tolerance", "message": "+/- 0.025 mm on critical features in Ti requires multiple finishing passes."},
+    {"severity": "MEDIUM", "category": "missing_info", "message": "Heat treat and inspection requirements not specified — high compliance risk."}
+  ],
+  "expected_quote_decision": "no_bid",
+  "expected_proof_requirement": {
+    "requires_cam_simulation": false,
+    "requires_gcode": false,
+    "requires_toolpath": false,
+    "reason_not_applicable": "No-bid due to material difficulty, missing certifications, and insufficient information for accurate quoting."
+  }
+}

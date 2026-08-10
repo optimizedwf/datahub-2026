@@ -1,0 +1,42 @@
+{
+  "fixture_id": "fixture-008-thin-wall",
+  "name": "Thin Wall Pocket — Aluminum",
+  "capability_class": {
+    "material_group": "aluminum",
+    "geometry_complexity": "complex",
+    "tolerance_class": "standard",
+    "operation_types": ["face", "pocket", "drill", "contour"]
+  },
+  "material": "Aluminum 6061-T6",
+  "quantity": 15,
+  "tolerance": "+/- 0.1 mm",
+  "finish": "Machined finish",
+  "missing_info": ["Wall thickness tolerance not explicitly called out"],
+  "expected_setup_class": "single_setup",
+  "expected_setup_count": 1,
+  "expected_operations": [
+    {"operation": "face_mill", "description": "Face mill to thickness", "tools": ["50mm face mill"]},
+    {"operation": "rough_pocket", "description": "Rough pocket leaving 0.5 mm wall stock", "tools": ["10mm end mill"]},
+    {"operation": "finish_walls", "description": "Finish thin walls with reduced chipload", "tools": ["6mm end mill"]},
+    {"operation": "drill", "description": "Drill 2x locating holes", "tools": ["6mm carbide drill"]},
+    {"operation": "chamfer", "description": "Chamfer edges", "tools": ["chamfer tool"]}
+  ],
+  "expected_tooling_assumptions": [
+    "carbide end mills (6 mm, 10 mm)",
+    "face mill",
+    "carbide drills",
+    "chamfer tool",
+    "reduced feed rates for thin wall sections"
+  ],
+  "expected_dfm_risks": [
+    {"severity": "MEDIUM", "category": "thin_wall", "message": "Wall thickness 1.5 mm < 2 mm — risk of vibration and deflection during machining."},
+    {"severity": "LOW", "category": "missing_info", "message": "Wall thickness tolerance not specified."}
+  ],
+  "expected_quote_decision": "needs_review",
+  "expected_proof_requirement": {
+    "requires_cam_simulation": true,
+    "requires_gcode": true,
+    "requires_toolpath": true,
+    "reason_not_applicable": "Simulation must verify deflection risk on thin walls."
+  }
+}

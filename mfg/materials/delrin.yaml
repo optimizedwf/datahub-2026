@@ -1,0 +1,41 @@
+# Delrin (Acetal Homopolymer) — Material Profile
+# Conservative default feeds and speeds for CNC milling
+
+material:
+  name: "Delrin"
+  grade: "Acetal Homopolymer"
+  family: "plastic"
+
+  hardness_hb: null # N/A; Shore D 80-85
+  tensile_mpa: 70
+
+  recommended_tooling:
+    - HSS # Acceptable; polished flutes to prevent melting
+    - carbide
+
+  feeds_speeds:
+    face_mill:
+      surface_speed_m_per_min: 400 # 300-600 m/min HSS or carbide
+      feed_per_tooth_mm: 0.20 # 0.15-0.30 mm/tooth
+      doc_max_mm: 2.0
+
+    end_mill:
+      surface_speed_m_per_min: 350 # 250-500 m/min HSS or carbide
+      feed_per_tooth_mm: 0.15 # 0.08-0.20 mm/tooth (per mm diameter)
+      doc_max_mm: 2.0 # Conservative axial DOC
+      doc_radial_max_pct: 50 # % of tool diameter
+
+    drill:
+      surface_speed_m_per_min: 250 # 150-350 m/min HSS or carbide
+      feed_per_rev_mm: 0.20 # 0.12-0.30 mm/rev
+      peck_depth_mm: 4.0 # Default peck for deep holes
+
+  coolant:
+    recommended: "air_blast"
+    notes: "Air blast or mist; flood can cause swelling and dimensional issues"
+
+  notes:
+    - "Sharp tools mandatory. Climb mill preferred. Avoid coolant on plastics."
+    - "Low melting point; polished flutes reduce frictional heat buildup"
+    - "Chip evacuation critical; long stringy chips can wrap around tool"
+    - "Surface finish: 0.4-0.8 µm Ra achievable with sharp tooling"

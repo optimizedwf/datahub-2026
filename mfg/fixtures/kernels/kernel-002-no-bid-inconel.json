@@ -1,0 +1,41 @@
+{
+  "fixture_id": "kernel-002-no-bid-inconel",
+  "name": "Exotic Alloy — Inconel 718 (No Bid)",
+  "description": "Inconel 718 exotic alloy part with tight tolerances. Expected no_bid with material/process risk flags. No linked packet — out of scope for current capability.",
+  "material": "Inconel 718",
+  "quantity": 2,
+  "tolerance": "+/- 0.01 mm",
+  "finish": "Ra 0.4 um on critical surfaces",
+  "due_date": "2026-06-30",
+  "linked_packet_id": null,
+  "feature_summary": "Complex 3D contoured part with tight tolerance bores and threaded holes. Thin-wall sections and high aspect ratio features.",
+  "artifact_refs": [
+    "customer-drawing-INC718-REV-B.pdf"
+  ],
+  "missing_info": [
+    "No material cert or heat treat specification provided",
+    "Thread callout on 4x holes unspecified (M6 vs UNC?)"
+  ],
+  "safety": {
+    "advisory_only": true,
+    "machine_execution": false,
+    "paid_order": false,
+    "production_authorization": false
+  },
+  "expected_decision": "no_bid",
+  "expected_confidence_band": "HIGH",
+  "expected_scope_status": "out_of_scope",
+  "expected_risk_categories": [
+    "exotic_material",
+    "material_risk",
+    "tooling_cost"
+  ],
+  "expected_review_gates": [
+    "setup_review",
+    "tooling_review",
+    "customer_communication",
+    "speeds_feeds_engineering",
+    "machinist_review"
+  ],
+  "expected_dfm_findings_count": 4
+}

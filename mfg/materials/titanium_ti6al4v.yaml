@@ -1,0 +1,44 @@
+# Ti6Al4V Grade 5 — Material Profile
+# Conservative advisory feeds and speeds for CNC milling.
+# ADVISORY ONLY: no controller connection, no production authorization.
+# Qualified machinist review required before any real machining.
+
+material:
+  name: "Ti6Al4V"
+  grade: "Grade 5"
+  family: "titanium"
+
+  hardness_hb: 334
+  tensile_mpa: 950
+
+  recommended_tooling:
+    - carbide
+    - coated_carbide
+
+  feeds_speeds:
+    face_mill:
+      surface_speed_m_per_min: 45
+      feed_per_tooth_mm: 0.04
+      doc_max_mm: 0.4
+
+    end_mill:
+      surface_speed_m_per_min: 45
+      feed_per_tooth_mm: 0.025
+      doc_max_mm: 0.25
+      doc_radial_max_pct: 15
+
+    drill:
+      surface_speed_m_per_min: 25
+      feed_per_rev_mm: 0.05
+      peck_depth_mm: 0.5
+
+  coolant:
+    recommended: "high_pressure_flood"
+    notes: "Maintain sharp tooling, rigid setup, short tool overhang, and strong coolant/chip evacuation. Avoid rubbing/work hardening. Validate with machinist and tool vendor data."
+
+  notes:
+    - "Titanium has low thermal conductivity; heat concentrates at the cutting edge."
+    - "Use sharp coated carbide tooling and conservative engagement."
+    - "Avoid dwell/rubbing to reduce work hardening and tool failure risk."
+    - "Thin-wall Ti parts require additional chatter/distortion control not captured by this simple CAM profile."
+    - "Profile is a conservative planning default, not a production cutting-data authorization."

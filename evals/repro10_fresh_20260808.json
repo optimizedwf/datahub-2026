@@ -1,0 +1,168 @@
+{
+ "summary": {
+  "run": "repro10 (2026-08-08 ~21:53 EDT, fresh)",
+  "engine": "LLM_URL=http://127.0.0.1:4000/v1/chat/completions LLM_MODEL=deepseek-v4-flash",
+  "mode": "best-of-1, both, no-writeback, ids h1-h10",
+  "metadata_n": 10,
+  "metadata_correct": 9,
+  "plain_n": 9,
+  "plain_correct": 5,
+  "metadata_ratio": "9/10",
+  "plain_ratio": "5/9",
+  "note": "h9-metadata + h8/h9-plain LLM-throttle failures (no SQL produced); GMS deadlocked at end (known issue) - run terminated; frozen canonical: metadata 0.95 vs plain 0.70 (20q best-of-3)"
+ },
+ "attempts": [
+  {
+   "mode": "metadata",
+   "qid": "h1",
+   "attempt": 1,
+   "time_s": 3.6,
+   "score": 1,
+   "err": "None"
+  },
+  {
+   "mode": "metadata",
+   "qid": "h2",
+   "attempt": 1,
+   "time_s": 14.9,
+   "score": 1,
+   "err": "None"
+  },
+  {
+   "mode": "metadata",
+   "qid": "h3",
+   "attempt": 1,
+   "time_s": 5.7,
+   "score": 1,
+   "err": "None"
+  },
+  {
+   "mode": "metadata",
+   "qid": "h4",
+   "attempt": 1,
+   "time_s": 4.3,
+   "score": 1,
+   "err": "None"
+  },
+  {
+   "mode": "metadata",
+   "qid": "h5",
+   "attempt": 1,
+   "time_s": 4.4,
+   "score": 1,
+   "err": "None"
+  },
+  {
+   "mode": "metadata",
+   "qid": "h6",
+   "attempt": 1,
+   "time_s": 5.6,
+   "score": 1,
+   "err": "None"
+  },
+  {
+   "mode": "metadata",
+   "qid": "h7",
+   "attempt": 1,
+   "time_s": 3.7,
+   "score": 1,
+   "err": "None"
+  },
+  {
+   "mode": "metadata",
+   "qid": "h8",
+   "attempt": 1,
+   "time_s": 3.4,
+   "score": 1,
+   "err": "None"
+  },
+  {
+   "mode": "metadata",
+   "qid": "h9",
+   "attempt": 1,
+   "time_s": 166.3,
+   "score": 0,
+   "err": "no"
+  },
+  {
+   "mode": "metadata",
+   "qid": "h10",
+   "attempt": 1,
+   "time_s": 163.3,
+   "score": 1,
+   "err": "None"
+  },
+  {
+   "mode": "plain",
+   "qid": "h1",
+   "attempt": 1,
+   "time_s": 2.0,
+   "score": 1,
+   "err": "None"
+  },
+  {
+   "mode": "plain",
+   "qid": "h2",
+   "attempt": 1,
+   "time_s": 18.6,
+   "score": 1,
+   "err": "None"
+  },
+  {
+   "mode": "plain",
+   "qid": "h3",
+   "attempt": 1,
+   "time_s": 60.1,
+   "score": 0,
+   "err": "None"
+  },
+  {
+   "mode": "plain",
+   "qid": "h4",
+   "attempt": 1,
+   "time_s": 227.7,
+   "score": 0,
+   "err": "all"
+  },
+  {
+   "mode": "plain",
+   "qid": "h5",
+   "attempt": 1,
+   "time_s": 5.3,
+   "score": 1,
+   "err": "None"
+  },
+  {
+   "mode": "plain",
+   "qid": "h6",
+   "attempt": 1,
+   "time_s": 78.3,
+   "score": 1,
+   "err": "None"
+  },
+  {
+   "mode": "plain",
+   "qid": "h7",
+   "attempt": 1,
+   "time_s": 4.9,
+   "score": 1,
+   "err": "None"
+  },
+  {
+   "mode": "plain",
+   "qid": "h8",
+   "attempt": 1,
+   "time_s": 152.9,
+   "score": 0,
+   "err": "all"
+  },
+  {
+   "mode": "plain",
+   "qid": "h9",
+   "attempt": 1,
+   "time_s": 344.3,
+   "score": 0,
+   "err": "None"
+  }
+ ]
+}

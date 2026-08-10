@@ -1,0 +1,46 @@
+{
+  "fixture_id": "fixture-012-no-bid-inconel",
+  "name": "Exotic Alloy Impeller — No Bid",
+  "capability_class": {
+    "material_group": "exotic",
+    "geometry_complexity": "complex",
+    "tolerance_class": "tight",
+    "operation_types": ["face", "contour", "drill"]
+  },
+  "material": "Inconel 718",
+  "quantity": 2,
+  "tolerance": "+/- 0.01 mm on airfoil surfaces",
+  "finish": "Ra 0.4 um on airfoil surfaces, EDM + hand polish spec",
+  "missing_info": [
+    "No material cert or heat treat specification provided",
+    "Blade profile section views missing — only top-level dimensions shown",
+    "EDM electrode material and quantity not specified"
+  ],
+  "expected_setup_class": "needs_review",
+  "expected_setup_count": 3,
+  "expected_operations": [
+    {"operation": "5axis_rough", "description": "5-axis simultaneous roughing of airfoil", "tools": ["ball end mill carbide AlCrN"]},
+    {"operation": "5axis_finish", "description": "5-axis finishing of airfoil profiles", "tools": ["ball end mill carbide AlCrN"]},
+    {"operation": "edm_sink", "description": "EDM sink for detail features", "tools": ["copper-graphite electrode"]},
+    {"operation": "hand_polish", "description": "Hand polish airfoil to Ra 0.4", "tools": ["polishing stone, abrasive paper"]}
+  ],
+  "expected_tooling_assumptions": [
+    "5-axis machining center required — not available in current cell",
+    "Carbide end mills with AlCrN coating for Inconel",
+    "EDM electrodes (copper-graphite)",
+    "CMM inspection fixture for airfoil profiles",
+    "Specialized workholding for thin airfoil sections"
+  ],
+  "expected_dfm_risks": [
+    {"severity": "HIGH", "category": "impeller_geometry", "message": "Complex 3D airfoil surfaces require 5-axis simultaneous machining."},
+    {"severity": "HIGH", "category": "tight_tolerance", "message": "+/- 0.01 mm on airfoil requires precision grinding or EDM — not standard milling."},
+    {"severity": "MEDIUM", "category": "missing_info", "message": "No heat treat spec — Inconel 718 typically requires solution treat + age."}
+  ],
+  "expected_quote_decision": "no_bid",
+  "expected_proof_requirement": {
+    "requires_cam_simulation": false,
+    "requires_gcode": false,
+    "requires_toolpath": false,
+    "reason_not_applicable": "No-bid due to 5-axis requirement and incomplete specification. CAM simulation not applicable without full 5-axis capability."
+  }
+}

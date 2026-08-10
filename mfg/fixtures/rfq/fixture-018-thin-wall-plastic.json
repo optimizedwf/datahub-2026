@@ -1,0 +1,42 @@
+{
+  "fixture_id": "fixture-018-thin-wall-plastic",
+  "name": "Thin Wall Plastic Housing — Needs Review",
+  "capability_class": {
+    "material_group": "plastic",
+    "geometry_complexity": "moderate",
+    "tolerance_class": "standard",
+    "operation_types": ["face", "pocket", "drill", "contour"]
+  },
+  "material": "Delrin (Acetal) 570",
+  "quantity": 20,
+  "tolerance": "+/- 0.2 mm",
+  "finish": "Standard machined finish",
+  "missing_info": ["Material grade not specified (150 vs 570)", "Wall thickness tolerance not called out"],
+  "expected_setup_class": "single_setup",
+  "expected_setup_count": 1,
+  "expected_operations": [
+    {"operation": "face_mill", "description": "Light face mill pass with sharp tool", "tools": ["50mm face mill sharp inserts"]},
+    {"operation": "rough_contour", "description": "Rough outside contour with reduced chipload", "tools": ["6mm sharp carbide end mill"]},
+    {"operation": "finish_contour", "description": "Finish contour to size", "tools": ["6mm sharp carbide end mill"]},
+    {"operation": "drill", "description": "Drill 2x mounting holes", "tools": ["5mm sharp carbide drill"]},
+    {"operation": "edge_break", "description": "Deburr all edges", "tools": ["deburring tool"]}
+  ],
+  "expected_tooling_assumptions": [
+    "sharp carbide end mills (6 mm)",
+    "face mill with sharp inserts",
+    "sharp carbide drills",
+    "deburring tool",
+    "vacuum table or double-sided tape for thin part holding"
+  ],
+  "expected_dfm_risks": [
+    {"severity": "MEDIUM", "category": "thin_wall", "message": "Wall thickness 1.8 mm in plastic — risk of chatter and deflection."},
+    {"severity": "LOW", "category": "missing_info", "message": "Material grade (Delrin 150 vs 570) not specified — affects stiffness and cut quality."}
+  ],
+  "expected_quote_decision": "needs_review",
+  "expected_proof_requirement": {
+    "requires_cam_simulation": true,
+    "requires_gcode": true,
+    "requires_toolpath": true,
+    "reason_not_applicable": ""
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "fixture_id": "fixture-009-deep-pocket",
+  "name": "Deep Pocket Block — Steel",
+  "capability_class": {
+    "material_group": "steel",
+    "geometry_complexity": "complex",
+    "tolerance_class": "standard",
+    "operation_types": ["face", "pocket", "drill"]
+  },
+  "material": "Steel 1018",
+  "quantity": 8,
+  "tolerance": "+/- 0.1 mm",
+  "finish": "Machined finish",
+  "missing_info": ["Pocket floor finish not specified"],
+  "expected_setup_class": "single_setup",
+  "expected_setup_count": 1,
+  "expected_operations": [
+    {"operation": "face_mill", "description": "Face mill top surface", "tools": ["50mm face mill"]},
+    {"operation": "rough_pocket", "description": "Rough deep pocket in multiple passes", "tools": ["12mm end mill"]},
+    {"operation": "finish_pocket_side", "description": "Finish pocket side walls", "tools": ["10mm end mill"]},
+    {"operation": "drill", "description": "Drill 2x through coolant holes", "tools": ["8mm carbide drill"]},
+    {"operation": "chamfer", "description": "Chamfer pocket opening", "tools": ["chamfer tool"]}
+  ],
+  "expected_tooling_assumptions": [
+    "AlTiN-coated carbide end mills (10 mm, 12 mm)",
+    "reduced feed for deep pocket (>2x diameter depth)",
+    "carbide drills with through-coolant capability",
+    "chamfer tool"
+  ],
+  "expected_dfm_risks": [
+    {"severity": "MEDIUM", "category": "deep_pocket", "message": "Pocket depth 35 mm > 2x tool diameter — reduced feed and chip evacuation needed."},
+    {"severity": "LOW", "category": "missing_info", "message": "Pocket floor finish not specified."}
+  ],
+  "expected_quote_decision": "needs_review",
+  "expected_proof_requirement": {
+    "requires_cam_simulation": true,
+    "requires_gcode": true,
+    "requires_toolpath": true,
+    "reason_not_applicable": ""
+  }
+}

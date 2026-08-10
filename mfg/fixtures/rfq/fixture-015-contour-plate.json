@@ -1,0 +1,36 @@
+{
+  "fixture_id": "fixture-015-contour-plate",
+  "name": "Contour Plate — Aluminum",
+  "capability_class": {
+    "material_group": "aluminum",
+    "geometry_complexity": "simple",
+    "tolerance_class": "standard",
+    "operation_types": ["face", "contour"]
+  },
+  "material": "Aluminum 6061-T6",
+  "quantity": 80,
+  "tolerance": "+/- 0.1 mm",
+  "finish": "Machined finish, break edges",
+  "missing_info": [],
+  "expected_setup_class": "single_setup",
+  "expected_setup_count": 1,
+  "expected_operations": [
+    {"operation": "face_mill", "description": "Face mill to thickness", "tools": ["50mm face mill"]},
+    {"operation": "rough_contour", "description": "Rough outside contour", "tools": ["10mm end mill"]},
+    {"operation": "finish_contour", "description": "Finish contour to dimension", "tools": ["8mm end mill"]},
+    {"operation": "chamfer", "description": "Chamfer perimeter", "tools": ["chamfer tool"]}
+  ],
+  "expected_tooling_assumptions": [
+    "carbide end mills (8, 10 mm)",
+    "face mill",
+    "chamfer tool"
+  ],
+  "expected_dfm_risks": [],
+  "expected_quote_decision": "quote_ready",
+  "expected_proof_requirement": {
+    "requires_cam_simulation": true,
+    "requires_gcode": true,
+    "requires_toolpath": true,
+    "reason_not_applicable": ""
+  }
+}

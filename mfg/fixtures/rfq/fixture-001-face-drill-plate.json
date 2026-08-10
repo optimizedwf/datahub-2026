@@ -1,0 +1,36 @@
+{
+  "fixture_id": "fixture-001-face-drill-plate",
+  "name": "Face + Drill Plate — Aluminum",
+  "capability_class": {
+    "material_group": "aluminum",
+    "geometry_complexity": "simple",
+    "tolerance_class": "standard",
+    "operation_types": ["face", "drill"]
+  },
+  "material": "Aluminum 6061-T6",
+  "quantity": 100,
+  "tolerance": "+/- 0.1 mm",
+  "finish": "As machined, break all edges 0.5 mm max",
+  "missing_info": [],
+  "expected_setup_class": "single_setup",
+  "expected_setup_count": 1,
+  "expected_operations": [
+    {"operation": "face_mill", "description": "Face mill top surface to thickness", "tools": ["50mm face mill"]},
+    {"operation": "drill", "description": "Drill through holes 6mm diameter", "tools": ["6mm carbide drill"]},
+    {"operation": "chamfer", "description": "Chamfer all hole edges", "tools": ["chamfer tool"]}
+  ],
+  "expected_tooling_assumptions": [
+    "standard carbide end mill set (3, 6, 10 mm)",
+    "50 mm face mill for stock cleanup",
+    "carbide drill set for hole pattern",
+    "chamfer tool for edge break"
+  ],
+  "expected_dfm_risks": [],
+  "expected_quote_decision": "quote_ready",
+  "expected_proof_requirement": {
+    "requires_cam_simulation": true,
+    "requires_gcode": true,
+    "requires_toolpath": true,
+    "reason_not_applicable": ""
+  }
+}

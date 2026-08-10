@@ -1,0 +1,44 @@
+# Magnesium AZ31B — Material Profile
+# Conservative advisory feeds and speeds for CNC milling.
+# ADVISORY ONLY: fire/chip hazard awareness required. No production authorization.
+# Coolant policy is fixture-sensitive (some shops forbid certain coolants on Mg).
+
+material:
+  name: "Magnesium AZ31B"
+  grade: "AZ31B"
+  family: "magnesium"
+
+  hardness_hb: 73
+  tensile_mpa: 260
+
+  recommended_tooling:
+    - carbide
+    - HSS
+
+  feeds_speeds:
+    face_mill:
+      surface_speed_m_per_min: 400
+      feed_per_tooth_mm: 0.15
+      doc_max_mm: 1.5
+
+    end_mill:
+      surface_speed_m_per_min: 350
+      feed_per_tooth_mm: 0.08
+      doc_max_mm: 0.5
+      doc_radial_max_pct: 40
+
+    drill:
+      surface_speed_m_per_min: 200
+      feed_per_rev_mm: 0.15
+      peck_depth_mm: 2.0
+
+  coolant:
+    recommended: "dry_or_special"
+    notes: "Magnesium chip fire hazard. Many shops run dry or with approved Mg coolant only. Never use water-based coolant unless process is qualified. Chip collection and fire suppression required."
+
+  notes:
+    - "Magnesium chips are flammable — control accumulation and ignition sources"
+    - "Sharp tools, positive rake, avoid fine powdery chips"
+    - "Fixture RUE-038 may require BLOCK/ask when coolant policy forbids standard flood"
+    - "Profile is a conservative planning default, not production authorization"
+    - "ADVISORY ONLY — qualified machinist review required"

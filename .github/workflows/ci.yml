@@ -1,0 +1,20 @@
+name: ci
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Lint (py_compile)
+        run: python3 -m py_compile src/agent.py evals/benchmark.py datasets/*/*.py
+      - name: Tests
+        run: python3 -m pytest tests/ -q
+      - name: Dataset scripts parse
+        run: bash -n examples/*.sh

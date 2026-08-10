@@ -1,0 +1,81 @@
+{
+  "version": "0.1.0",
+  "title": "CNC AGI Bakeoff",
+  "description": "Bakeoff harness for evaluating CAD generation candidates against canonical CNC cases. No external model APIs are called by default; command candidates require --allow-commands.",
+  "config": {
+    "default_output_dir": "artifacts/cnc-agi-bakeoff",
+    "sandbox_target": "local",
+    "require_sandbox": true,
+    "validation_timeout": 300,
+    "feature_extraction_timeout": 180,
+    "dfm_timeout": 120,
+    "command_timeout": 600
+  },
+  "cases": [
+    {
+      "case_id": "plate-four-holes",
+      "prompt": "Generate a rectangular plate 100mm x 60mm x 6mm with four through holes of 6mm diameter at corners 8mm from edges. Use cadquery.",
+      "expected_material": "Aluminum 6061",
+      "expected_operations": ["drill"]
+    },
+    {
+      "case_id": "slotted-bracket",
+      "prompt": "Generate an L-bracket 80mm x 60mm x 8mm thickness with two elongated slots 12mm x 6mm on the vertical face and two counterbored holes on the horizontal face. Use cadquery.",
+      "expected_material": "Steel",
+      "expected_operations": ["slot", "drill", "counterbore"]
+    },
+    {
+      "case_id": "pocket-plate",
+      "prompt": "Generate a rectangular plate 120mm x 80mm x 10mm with a rectangular pocket 60mm x 40mm x 4mm deep centered on the top face. Use cadquery.",
+      "expected_material": "Aluminum 6061",
+      "expected_operations": ["pocket", "face_mill"]
+    },
+    {
+      "case_id": "flange-holes-pattern",
+      "prompt": "Generate a circular flange 80mm diameter x 10mm thick with a 20mm center hole and six 6mm bolt holes evenly spaced on a 60mm bolt circle. Use cadquery.",
+      "expected_material": "Steel",
+      "expected_operations": ["drill", "bore"]
+    },
+    {
+      "case_id": "v-block",
+      "prompt": "Generate a V-block 80mm x 40mm x 40mm with a 90-degree V-groove along the center of the top face, 20mm deep. Use cadquery.",
+      "expected_material": "Tool Steel",
+      "expected_operations": ["v-groove", "mill"]
+    }
+  ],
+  "candidates": [
+    {
+      "candidate_id": "v1-existing-generation",
+      "name": "Existing Qwen Generation (local)",
+      "kind": "existing_generation",
+      "generation_json": "artifacts/hector-qwen-cad-generation/generation.json",
+      "description": "Uses existing generation from artifacts/hector-qwen-cad-generation/generation.json. No external API call."
+    },
+    {
+      "candidate_id": "v2-placeholder-command",
+      "name": "Placeholder Command Candidate",
+      "kind": "command",
+      "disabled": true,
+      "description": "Template for future model invocation. Disabled by default; use --allow-commands to enable.",
+      "argv": ["python3", "scripts/hector_qwen_cad_generator.py", "--prompt", "{prompt}", "--case-id", "{case_id}", "--candidate-id", "{candidate_id}", "--output", "{candidate_dir}/generation.json"]
+    },
+    {
+      "candidate_id": "v3-local-cadquery-runner",
+      "name": "Local CadQuery Runner (disabled)",
+      "kind": "command",
+      "disabled": true,
+      "description": "Runs local_cadquery_runner for prompt-based CAD generation. Disabled by default.",
+      "argv": ["python3", "scripts/local_cadquery_runner.py", "--prompt", "{prompt}", "--case-id", "{case_id}", "--output", "{candidate_dir}/generation.json"]
+    }
+  ],
+  "scoring": {
+    "generation_present": 10,
+    "validation_json_present": 10,
+    "cad_gate_passed": 25,
+    "step_found": 20,
+    "feature_extraction_present": 15,
+    "dfm_present": 10,
+    "safety_invariant": 10,
+    "max_total": 100
+  }
+}

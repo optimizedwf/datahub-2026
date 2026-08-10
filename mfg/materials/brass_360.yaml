@@ -1,0 +1,41 @@
+# Brass 360 — Material Profile
+# Conservative default feeds and speeds for CNC milling
+
+material:
+  name: "Brass 360"
+  grade: "360"
+  family: "brass"
+
+  hardness_hb: 90 # Brinell (80-100 range)
+  tensile_mpa: 340
+
+  recommended_tooling:
+    - HSS # Acceptable, sharp tools critical
+    - carbide
+
+  feeds_speeds:
+    face_mill:
+      surface_speed_m_per_min: 600 # 400-800 m/min HSS or carbide
+      feed_per_tooth_mm: 0.20 # 0.15-0.30 mm/tooth
+      doc_max_mm: 2.5
+
+    end_mill:
+      surface_speed_m_per_min: 500 # 350-650 m/min HSS or carbide
+      feed_per_tooth_mm: 0.10 # 0.05-0.15 mm/tooth (per mm diameter)
+      doc_max_mm: 2.0 # Conservative axial DOC
+      doc_radial_max_pct: 60 # % of tool diameter
+
+    drill:
+      surface_speed_m_per_min: 300 # 200-400 m/min HSS or carbide
+      feed_per_rev_mm: 0.20 # 0.12-0.30 mm/rev
+      peck_depth_mm: 3.0 # Default peck for deep holes
+
+  coolant:
+    recommended: "optional"
+    notes: "Air blast sufficient; flood acceptable for tight tolerances"
+
+  notes:
+    - "Free-machining brass; excellent chip formation and surface finish"
+    - "Sharp tools critical to prevent work-hardening and tearing"
+    - "High speeds possible due to low cutting forces"
+    - "Surface finish: 0.8-1.6 µm Ra achievable with sharp tooling"

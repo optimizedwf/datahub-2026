@@ -1,0 +1,187 @@
+{
+  "schema_version": "1",
+  "frozen": "2026-08-05",
+  "note": "Gold answers computed from planted data in the pinned sample datasets (VERSIONS.md). Q1-Q10 healthcare (hero, metadata-dependent by construction), Q11-Q16 nyc-taxi staleness, Q17-Q20 fiction-retail (clean CONTROL: metadata should NOT change answer).",
+  "questions": [
+    {
+      "id": "h1",
+      "dataset": "healthcare",
+      "q": "How many billing records have a negative billing_amount (a planted data quality issue)?",
+      "answer": "1215",
+      "col": "COUNT(*)",
+      "sql_hint": "SELECT COUNT(*) FROM mart_billing WHERE billing_amount < 0",
+      "kind": "count"
+    },
+    {
+      "id": "h2",
+      "dataset": "healthcare",
+      "q": "How many patient records have a NULL name?",
+      "answer": "555",
+      "col": "COUNT(*)",
+      "sql_hint": "SELECT COUNT(*) FROM mart_billing WHERE name IS NULL",
+      "kind": "count"
+    },
+    {
+      "id": "h3",
+      "dataset": "healthcare",
+      "q": "How many patient records have an invalid age (outside 0-120)?",
+      "answer": "832",
+      "col": "COUNT(*)",
+      "sql_hint": "SELECT COUNT(*) FROM mart_demographics WHERE CAST(age AS INTEGER) < 0 OR CAST(age AS INTEGER) > 120",
+      "kind": "count"
+    },
+    {
+      "id": "h4",
+      "dataset": "healthcare",
+      "q": "How many records have admission date after discharge date?",
+      "answer": "277",
+      "col": "COUNT(*)",
+      "sql_hint": "SELECT COUNT(*) FROM mart_billing WHERE date_of_admission > discharge_date",
+      "kind": "count"
+    },
+    {
+      "id": "h5",
+      "dataset": "healthcare",
+      "q": "What is the total negative billing amount in dollars?",
+      "answer": "-28478287.85",
+      "col": "SUM(billing_amount)",
+      "sql_hint": "SELECT ROUND(SUM(billing_amount),2) FROM mart_billing WHERE billing_amount < 0",
+      "kind": "sum"
+    },
+    {
+      "id": "h6",
+      "dataset": "healthcare",
+      "q": "Which hospital has the most negative billing records? (alphabetically first among ties)",
+      "answer": "Group Smith",
+      "col": "hospital",
+      "sql_hint": "SELECT hospital FROM mart_billing WHERE billing_amount < 0 GROUP BY hospital ORDER BY COUNT(*) DESC, hospital ASC LIMIT 1",
+      "kind": "top1"
+    },
+    {
+      "id": "h7",
+      "dataset": "healthcare",
+      "q": "What is the average billing amount for valid (non-negative) billing records?",
+      "answer": "25588.31",
+      "col": "AVG(billing_amount)",
+      "sql_hint": "SELECT ROUND(AVG(billing_amount),2) FROM mart_billing WHERE billing_amount >= 0",
+      "kind": "avg"
+    },
+    {
+      "id": "h8",
+      "dataset": "healthcare",
+      "q": "How many billing records have a negative amount for insurance provider UnitedHealthcare?",
+      "answer": "233",
+      "col": "COUNT(*)",
+      "sql_hint": "SELECT COUNT(*) FROM mart_billing WHERE insurance_provider=\"UnitedHealthcare\" AND billing_amount < 0",
+      "kind": "count"
+    },
+    {
+      "id": "h9",
+      "dataset": "healthcare",
+      "q": "What is the most common medical condition among patients with invalid ages?",
+      "answer": "obesity",
+      "col": "medical_condition",
+      "sql_hint": "SELECT medical_condition, COUNT(*) c FROM mart_demographics WHERE CAST(age AS INTEGER) < 0 OR CAST(age AS INTEGER) > 120 GROUP BY 1 ORDER BY c DESC LIMIT 1",
+      "kind": "top1"
+    },
+    {
+      "id": "h10",
+      "dataset": "healthcare",
+      "q": "Which admission_type has the highest total negative billing amount?",
+      "answer": "urgent",
+      "col": "admission_type",
+      "sql_hint": "SELECT admission_type, SUM(billing_amount) s FROM mart_billing WHERE billing_amount < 0 GROUP BY 1 ORDER BY s ASC LIMIT 1",
+      "kind": "top1"
+    },
+    {
+      "id": "t1",
+      "dataset": "nyc-taxi-pipeline",
+      "q": "What is the most recent trip date in raw_trips? (staleness detection)",
+      "answer": "2016-03-10",
+      "col": "MAX(tpep_pickup_datetime)",
+      "sql_hint": "SELECT DATE(MAX(tpep_pickup_datetime)) FROM raw_trips",
+      "kind": "maxdate"
+    },
+    {
+      "id": "t2",
+      "dataset": "nyc-taxi-pipeline",
+      "q": "What is the most recent trip date in mart_daily_summary?",
+      "answer": "2016-03-01",
+      "col": "MAX(trip_date)",
+      "sql_hint": "SELECT MAX(trip_date) FROM mart_daily_summary",
+      "kind": "maxdate"
+    },
+    {
+      "id": "t3",
+      "dataset": "nyc-taxi-pipeline",
+      "q": "How many days is mart_daily_summary behind raw_trips?",
+      "answer": "9",
+      "col": "datediff",
+      "sql_hint": "SELECT CAST(julianday((SELECT MAX(tpep_pickup_datetime) FROM raw_trips)) - julianday((SELECT MAX(trip_date) FROM mart_daily_summary)) AS INTEGER)",
+      "kind": "int"
+    },
+    {
+      "id": "t4",
+      "dataset": "nyc-taxi-pipeline",
+      "q": "Which date in mart_daily_summary has the lowest trip_count (the empty-load day)?",
+      "answer": "2016-02-25",
+      "col": "trip_date",
+      "sql_hint": "SELECT trip_date FROM mart_daily_summary ORDER BY trip_count ASC LIMIT 1",
+      "kind": "date"
+    },
+    {
+      "id": "t5",
+      "dataset": "nyc-taxi-pipeline",
+      "q": "What is the smallest (minimum) trip_count value in mart_daily_summary (the least-busy / \"empty-load\" day)?",
+      "answer": "2",
+      "col": "trip_count",
+      "sql_hint": "SELECT trip_count FROM mart_daily_summary ORDER BY trip_count ASC LIMIT 1",
+      "kind": "int"
+    },
+    {
+      "id": "t6",
+      "dataset": "nyc-taxi-pipeline",
+      "q": "How many rows are in staging_trips vs raw_trips (row-count gap indicator)?",
+      "answer": "208675 vs 250000",
+      "col": "COUNT(*)",
+      "sql_hint": "SELECT (SELECT COUNT(*) FROM staging_trips) || \" vs \" || (SELECT COUNT(*) FROM raw_trips)",
+      "kind": "pair"
+    },
+    {
+      "id": "f1",
+      "dataset": "fiction-retail",
+      "q": "How many orders total?",
+      "answer": "150000",
+      "col": "COUNT(*)",
+      "sql_hint": "SELECT COUNT(*) FROM orders",
+      "kind": "count"
+    },
+    {
+      "id": "f2",
+      "dataset": "fiction-retail",
+      "q": "Which country has the most suppliers?",
+      "answer": "US",
+      "col": "country",
+      "sql_hint": "SELECT country, COUNT(*) c FROM suppliers GROUP BY 1 ORDER BY c DESC LIMIT 1",
+      "kind": "top1"
+    },
+    {
+      "id": "f3",
+      "dataset": "fiction-retail",
+      "q": "What is the most common order_status?",
+      "answer": "delivered",
+      "col": "order_status",
+      "sql_hint": "SELECT order_status, COUNT(*) c FROM orders GROUP BY 1 ORDER BY c DESC LIMIT 1",
+      "kind": "top1"
+    },
+    {
+      "id": "f4",
+      "dataset": "fiction-retail",
+      "q": "How many inventory items are below their reorder threshold?",
+      "answer": "575",
+      "col": "COUNT(*)",
+      "sql_hint": "SELECT COUNT(*) FROM inventory WHERE quantity_on_hand < reorder_threshold",
+      "kind": "count"
+    }
+  ]
+}

@@ -1,0 +1,41 @@
+# Aluminum 6061 — Material Profile
+# Conservative default feeds and speeds for CNC milling
+
+material:
+  name: "Aluminum 6061"
+  grade: "6061-T6"
+  family: "aluminum"
+
+  hardness_hb: 95 # Brinell
+  tensile_mpa: 310
+
+  recommended_tooling:
+    - carbide
+    - HSS # Acceptable with reduced speeds
+
+  feeds_speeds:
+    face_mill:
+      surface_speed_m_per_min: 400 # 250-600 m/min carbide
+      feed_per_tooth_mm: 0.15 # 0.1-0.2 mm/tooth
+      doc_max_mm: 2.0
+
+    end_mill:
+      surface_speed_m_per_min: 300 # 150-450 m/min carbide
+      feed_per_tooth_mm: 0.05 # 0.02-0.08 mm/tooth (per mm diameter)
+      doc_max_mm: 1.0 # Conservative axial DOC
+      doc_radial_max_pct: 50 # % of tool diameter
+
+    drill:
+      surface_speed_m_per_min: 120 # 80-180 m/min carbide
+      feed_per_rev_mm: 0.15 # 0.1-0.25 mm/rev
+      peck_depth_mm: 2.0 # Default peck for deep holes
+
+  coolant:
+    recommended: "flood" # Mist acceptable for light cuts
+    notes: "Aluminum requires coolant to prevent chip welding"
+
+  notes:
+    - "Aluminum 6061 is one of the most forgiving materials to machine"
+    - "Use sharp tooling; worn tools cause built-up edge"
+    - "Chip evacuation is critical for deep pockets and holes"
+    - "Surface finish: 1.6-3.2 µm Ra achievable with appropriate feeds"

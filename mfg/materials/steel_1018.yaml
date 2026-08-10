@@ -1,0 +1,41 @@
+# Steel 1018 — Material Profile
+# Conservative default feeds and speeds for CNC milling
+
+material:
+  name: "Steel 1018"
+  grade: "1018"
+  family: "steel"
+
+  hardness_hb: 135 # Brinell (120-150 range)
+  tensile_mpa: 440
+
+  recommended_tooling:
+    - carbide # Preferred for productivity
+    - HSS # Acceptable at reduced speeds
+
+  feeds_speeds:
+    face_mill:
+      surface_speed_m_per_min: 200 # 120 HSS / 200-300 m/min carbide
+      feed_per_tooth_mm: 0.12 # 0.08-0.15 mm/tooth
+      doc_max_mm: 2.0
+
+    end_mill:
+      surface_speed_m_per_min: 180 # 90 HSS / 180-250 m/min carbide
+      feed_per_tooth_mm: 0.05 # 0.03-0.08 mm/tooth (per mm diameter)
+      doc_max_mm: 0.5 # Conservative axial DOC
+      doc_radial_max_pct: 40 # % of tool diameter
+
+    drill:
+      surface_speed_m_per_min: 100 # 60 HSS / 100-130 m/min carbide
+      feed_per_rev_mm: 0.12 # 0.08-0.18 mm/rev
+      peck_depth_mm: 1.5 # Default peck for deep holes
+
+  coolant:
+    recommended: "flood"
+    notes: "Flood coolant required for chip evacuation and heat control"
+
+  notes:
+    - "1018 is a mild low-carbon steel, excellent for general-purpose machining"
+    - "Carbide tooling preferred for higher material removal rates"
+    - "Rigid setup recommended to minimize chatter"
+    - "Surface finish: 1.6-3.2 µm Ra achievable with sharp tooling"

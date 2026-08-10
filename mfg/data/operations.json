@@ -1,0 +1,452 @@
+{
+  "generated_at": "2026-06-27T00:00:00Z",
+  "job_name": "slot_bracket",
+  "source": "geometry_features.json",
+  "machine": {
+    "name": "Haas VF-2",
+    "controller": "haas_ngc",
+    "axes": 3,
+    "work_offset": "G54",
+    "max_spindle_rpm": 8100,
+    "max_feed_mm_per_min": 12700
+  },
+  "material": {
+    "name": "6061-T6 Aluminum",
+    "family": "aluminum",
+    "specific_cutting_energy_n_mm2": 800
+  },
+  "stock": {
+    "length_mm": 120.0,
+    "width_mm": 90.0,
+    "height_mm": 15.0
+  },
+  "wcs": {
+    "origin": "top_left_corner",
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0,
+    "clearance_plane_mm": 5.0,
+    "retract_plane_mm": 1.0
+  },
+  "tools": [
+    {
+      "tool_number": 1,
+      "description": "Carbide Face Mill",
+      "diameter_mm": 50.0,
+      "flutes": 4,
+      "material": "carbide",
+      "type": "face_mill",
+      "max_doc_mm": 2.0,
+      "gauge_length_mm": 75.0,
+      "offset": "H01",
+      "notes": "Indexable carbide inserts, AL grade"
+    },
+    {
+      "tool_number": 2,
+      "description": "Carbide End Mill",
+      "diameter_mm": 6.0,
+      "flutes": 4,
+      "material": "carbide",
+      "type": "end_mill",
+      "corner_radius_mm": 0.0,
+      "coating": "AlTiN",
+      "max_doc_mm": 12.0,
+      "gauge_length_mm": 50.0,
+      "offset": "H02",
+      "notes": "General purpose 4FL for roughing & finishing aluminum"
+    },
+    {
+      "tool_number": 3,
+      "description": "Spot Drill",
+      "diameter_mm": 10.0,
+      "point_angle_deg": 90.0,
+      "flutes": 2,
+      "material": "carbide",
+      "type": "spot_drill",
+      "gauge_length_mm": 60.0,
+      "offset": "H03",
+      "notes": "90° included angle for hole spotting"
+    },
+    {
+      "tool_number": 4,
+      "description": "Carbide Twist Drill",
+      "diameter_mm": 6.0,
+      "flutes": 2,
+      "material": "carbide",
+      "type": "drill",
+      "point_angle_deg": 140.0,
+      "gauge_length_mm": 70.0,
+      "offset": "H04",
+      "notes": "Through-hole drill for 6mm holes, 140° split point"
+    },
+    {
+      "tool_number": 5,
+      "description": "Chamfer Mill",
+      "diameter_mm": 10.0,
+      "point_angle_deg": 90.0,
+      "flutes": 2,
+      "material": "carbide",
+      "type": "chamfer_mill",
+      "gauge_length_mm": 60.0,
+      "offset": "H05",
+      "notes": "90° chamfer/deburr tool"
+    }
+  ],
+  "operations": [
+    {
+      "op_number": 10,
+      "description": "Face top surface",
+      "category": "facing",
+      "tool_number": 1,
+      "tool_label": "T1",
+      "strategy": "zigzag",
+      "features": ["face-003"],
+      "cutting_parameters": {
+        "spindle_rpm": 2546,
+        "feed_mm_per_min": 1528,
+        "feed_mm_per_tooth": 0.15,
+        "surface_speed_m_per_min": 400,
+        "axial_doc_mm": 1.5,
+        "radial_stepover_mm": 40.0,
+        "radial_stepover_pct": 80,
+        "approach": "plunge_off_stock",
+        "coolant": "flood"
+      },
+      "geometry": {
+        "type": "rectangular",
+        "start_x": -5.0,
+        "start_y": -5.0,
+        "end_x": 125.0,
+        "end_y": 95.0,
+        "pass_direction": "climb",
+        "stepover_pattern": "parallel"
+      },
+      "depth_control": {
+        "reference": "stock_top",
+        "final_z_mm": -1.5,
+        "total_depth_mm": 1.5,
+        "passes": 1,
+        "finish_allowance_mm": 0.0
+      },
+      "notes": "Clean up stock surface. Establish Z zero after facing."
+    },
+    {
+      "op_number": 20,
+      "description": "Rough pocket-001",
+      "category": "roughing",
+      "tool_number": 2,
+      "tool_label": "T2",
+      "strategy": "adaptive_trochoidal",
+      "features": ["pocket-001", "bridge-contour-005"],
+      "cutting_parameters": {
+        "spindle_rpm": 8100,
+        "feed_mm_per_min": 972,
+        "feed_mm_per_tooth": 0.03,
+        "surface_speed_m_per_min": 152.7,
+        "axial_doc_mm": 1.0,
+        "radial_stepover_mm": 3.0,
+        "radial_stepover_pct": 50,
+        "plunge_feed_mm_per_min": 300,
+        "plunge_type": "helical",
+        "coolant": "flood"
+      },
+      "geometry": {
+        "type": "pocket_round",
+        "center_x": 30.0,
+        "center_y": 65.0,
+        "diameter_mm": 10.0,
+        "boundary_ref": "bridge-contour-005",
+        "pass_direction": "climb"
+      },
+      "depth_control": {
+        "reference": "top_face",
+        "final_z_mm": -7.5,
+        "total_depth_mm": 7.5,
+        "passes": 8,
+        "finish_allowance_mm": 0.3,
+        "finish_allowance_radial_mm": 0.3
+      },
+      "notes": "Adaptive clearing inside bridge-contour-005. Leave 0.3 mm for finishing."
+    },
+    {
+      "op_number": 30,
+      "description": "Finish pocket-001",
+      "category": "finishing",
+      "tool_number": 2,
+      "tool_label": "T2",
+      "strategy": "contour_parallel",
+      "features": ["pocket-001", "bridge-contour-005"],
+      "cutting_parameters": {
+        "spindle_rpm": 8100,
+        "feed_mm_per_min": 600,
+        "feed_mm_per_tooth": 0.0185,
+        "surface_speed_m_per_min": 152.7,
+        "axial_doc_mm": 0.25,
+        "radial_doc_mm": 0.3,
+        "coolant": "flood"
+      },
+      "geometry": {
+        "type": "pocket_round",
+        "center_x": 30.0,
+        "center_y": 65.0,
+        "diameter_mm": 10.0,
+        "boundary_ref": "bridge-contour-005",
+        "pass_direction": "climb"
+      },
+      "depth_control": {
+        "reference": "top_face",
+        "final_z_mm": -7.5,
+        "total_depth_mm": 7.5,
+        "finish_pass_wall": true,
+        "finish_pass_floor": true
+      },
+      "notes": "Finish wall contour at full depth, then clean floor."
+    },
+    {
+      "op_number": 40,
+      "description": "Rough pocket-002",
+      "category": "roughing",
+      "tool_number": 2,
+      "tool_label": "T2",
+      "strategy": "adaptive_trochoidal",
+      "features": ["pocket-002", "bridge-contour-006"],
+      "cutting_parameters": {
+        "spindle_rpm": 8100,
+        "feed_mm_per_min": 972,
+        "feed_mm_per_tooth": 0.03,
+        "surface_speed_m_per_min": 152.7,
+        "axial_doc_mm": 1.0,
+        "radial_stepover_mm": 3.0,
+        "radial_stepover_pct": 50,
+        "plunge_feed_mm_per_min": 300,
+        "plunge_type": "helical",
+        "coolant": "flood"
+      },
+      "geometry": {
+        "type": "pocket_round",
+        "center_x": 99.0,
+        "center_y": 60.0,
+        "diameter_mm": 10.0,
+        "boundary_ref": "bridge-contour-006",
+        "pass_direction": "climb"
+      },
+      "depth_control": {
+        "reference": "top_face",
+        "final_z_mm": -7.5,
+        "total_depth_mm": 7.5,
+        "passes": 8,
+        "finish_allowance_mm": 0.3,
+        "finish_allowance_radial_mm": 0.3
+      },
+      "notes": "Adaptive clearing inside bridge-contour-006. Leave 0.3 mm for finishing."
+    },
+    {
+      "op_number": 50,
+      "description": "Finish pocket-002",
+      "category": "finishing",
+      "tool_number": 2,
+      "tool_label": "T2",
+      "strategy": "contour_parallel",
+      "features": ["pocket-002", "bridge-contour-006"],
+      "cutting_parameters": {
+        "spindle_rpm": 8100,
+        "feed_mm_per_min": 600,
+        "feed_mm_per_tooth": 0.0185,
+        "surface_speed_m_per_min": 152.7,
+        "axial_doc_mm": 0.25,
+        "radial_doc_mm": 0.3,
+        "coolant": "flood"
+      },
+      "geometry": {
+        "type": "pocket_round",
+        "center_x": 99.0,
+        "center_y": 60.0,
+        "diameter_mm": 10.0,
+        "boundary_ref": "bridge-contour-006",
+        "pass_direction": "climb"
+      },
+      "depth_control": {
+        "reference": "top_face",
+        "final_z_mm": -7.5,
+        "total_depth_mm": 7.5,
+        "finish_pass_wall": true,
+        "finish_pass_floor": true
+      },
+      "notes": "Finish wall contour at full depth, then clean floor."
+    },
+    {
+      "op_number": 60,
+      "description": "Spot drill all through holes",
+      "category": "drilling",
+      "tool_number": 3,
+      "tool_label": "T3",
+      "strategy": "spot_drill",
+      "features": ["hole-001", "hole-002", "hole-003", "hole-004"],
+      "cutting_parameters": {
+        "spindle_rpm": 4000,
+        "feed_mm_per_min": 400,
+        "feed_mm_per_rev": 0.1,
+        "surface_speed_m_per_min": 125.7,
+        "dwell_seconds": 0.25,
+        "coolant": "flood"
+      },
+      "geometry": {
+        "type": "point_to_point",
+        "holes": [
+          { "id": "hole-001", "x": 15.0, "y": 15.0 },
+          { "id": "hole-002", "x": 105.0, "y": 15.0 },
+          { "id": "hole-003", "x": 15.0, "y": 75.0 },
+          { "id": "hole-004", "x": 105.0, "y": 75.0 }
+        ]
+      },
+      "depth_control": {
+        "reference": "top_face",
+        "final_z_mm": -2.0,
+        "cycle": "G81",
+        "dwell": true
+      },
+      "notes": "90° spot drill to create ~1mm chamfer entry for each hole."
+    },
+    {
+      "op_number": 70,
+      "description": "Drill through holes to 6mm",
+      "category": "drilling",
+      "tool_number": 4,
+      "tool_label": "T4",
+      "strategy": "peck_drill",
+      "features": ["hole-001", "hole-002", "hole-003", "hole-004"],
+      "cutting_parameters": {
+        "spindle_rpm": 6366,
+        "feed_mm_per_min": 955,
+        "feed_mm_per_rev": 0.15,
+        "surface_speed_m_per_min": 120.0,
+        "peck_depth_mm": 2.0,
+        "coolant": "flood"
+      },
+      "geometry": {
+        "type": "point_to_point",
+        "holes": [
+          { "id": "hole-001", "x": 15.0, "y": 15.0 },
+          { "id": "hole-002", "x": 105.0, "y": 15.0 },
+          { "id": "hole-003", "x": 15.0, "y": 75.0 },
+          { "id": "hole-004", "x": 105.0, "y": 75.0 }
+        ]
+      },
+      "depth_control": {
+        "reference": "top_face",
+        "final_z_mm": -17.5,
+        "total_depth_mm": 15.0,
+        "through_hole": true,
+        "breakthrough_mm": 2.5,
+        "cycle": "G83",
+        "peck_depth_mm": 2.0
+      },
+      "notes": "Peck drill with G83, 2mm peck increments. Drill 2.5mm past stock bottom to ensure clean through-hole."
+    },
+    {
+      "op_number": 80,
+      "description": "Rough & finish external contour",
+      "category": "contouring",
+      "tool_number": 2,
+      "tool_label": "T2",
+      "strategy": "contour_rough_finish",
+      "features": ["bridge-contour-007"],
+      "passes": [
+        {
+          "pass_type": "rough",
+          "spindle_rpm": 8100,
+          "feed_mm_per_min": 972,
+          "axial_doc_mm": 7.5,
+          "radial_doc_mm": 3.0,
+          "finish_allowance_mm": 0.1
+        },
+        {
+          "pass_type": "rough",
+          "spindle_rpm": 8100,
+          "feed_mm_per_min": 972,
+          "axial_doc_mm": 7.5,
+          "radial_doc_mm": 3.0,
+          "finish_allowance_mm": 0.1,
+          "z_start_mm": -7.5
+        },
+        {
+          "pass_type": "finish",
+          "spindle_rpm": 8100,
+          "feed_mm_per_min": 600,
+          "axial_doc_mm": 15.0,
+          "radial_doc_mm": 0.1
+        }
+      ],
+      "cutting_parameters": {
+        "surface_speed_m_per_min": 152.7,
+        "ramp_in": true,
+        "ramp_angle_deg": 5.0,
+        "coolant": "flood"
+      },
+      "geometry": {
+        "type": "contour",
+        "boundary_ref": "bridge-contour-007",
+        "pass_direction": "climb",
+        "cutter_comp": "G41"
+      },
+      "depth_control": {
+        "reference": "top_face",
+        "final_z_mm": -15.0,
+        "total_depth_mm": 15.0,
+        "rough_passes": 2,
+        "finish_passes": 1,
+        "finish_allowance_mm": 0.1
+      },
+      "notes": "Two rough passes at Z-7.5 and Z-15, then full-depth finish pass with cutter comp."
+    },
+    {
+      "op_number": 90,
+      "description": "Deburr and chamfer all exposed edges",
+      "category": "finishing",
+      "tool_number": 5,
+      "tool_label": "T5",
+      "strategy": "edge_break",
+      "features": ["bridge-contour-007", "bridge-contour-005", "bridge-contour-006", "hole-001", "hole-002", "hole-003", "hole-004"],
+      "cutting_parameters": {
+        "spindle_rpm": 4000,
+        "feed_mm_per_min": 500,
+        "feed_mm_per_tooth": 0.0625,
+        "surface_speed_m_per_min": 125.7,
+        "chamfer_width_mm": 0.5,
+        "coolant": "flood"
+      },
+      "geometry": {
+        "type": "contour_and_holes",
+        "chamfer_pattern": "top_edges_only",
+        "pass_direction": "climb"
+      },
+      "depth_control": {
+        "reference": "top_face",
+        "chamfer_z_mm": -0.5,
+        "approach": "from_above"
+      },
+      "notes": "Break all sharp edges with 0.5mm chamfer. Trace part contour, pocket perimeters, and hole rims."
+    }
+  ],
+  "workflow": {
+    "tool_change_strategy": "minimize_changes",
+    "tool_sequence": [1, 2, 2, 2, 2, 3, 4, 2, 5],
+    "op_sequence": [10, 20, 30, 40, 50, 60, 70, 80, 90],
+    "coolant_policy": "flood_all_ops",
+    "rapid_to_clearance": true,
+    "clearance_plane_mm": 5.0,
+    "retract_plane_mm": 1.0
+  },
+  "safety": {
+    "advisory_only": true,
+    "machine_execution": false,
+    "review_required": true,
+    "notes": [
+      "All parameters are advisory starting points. Verify against actual machine conditions.",
+      "Perform dry run before cutting material.",
+      "Qualified machinist review required before production use.",
+      "Verify tool offsets, work coordinate system, and part zero before running.",
+      "Adjust speeds/feeds based on observed tool wear and chip formation."
+    ]
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "fixture_id": "fixture-016-plastic-delrin",
+  "name": "Plastic Plate — Delrin (Acetal)",
+  "capability_class": {
+    "material_group": "plastic",
+    "geometry_complexity": "simple",
+    "tolerance_class": "standard",
+    "operation_types": ["face", "drill", "contour"]
+  },
+  "material": "Delrin (Acetal) 150",
+  "quantity": 50,
+  "tolerance": "+/- 0.5 mm",
+  "finish": "Standard machined finish",
+  "missing_info": [],
+  "expected_setup_class": "single_setup",
+  "expected_setup_count": 1,
+  "expected_operations": [
+    {"operation": "face_mill", "description": "Face mill to thickness with sharp tooling", "tools": ["50mm face mill sharp inserts"]},
+    {"operation": "contour", "description": "Cut outside profile", "tools": ["6mm sharp carbide end mill"]},
+    {"operation": "drill", "description": "Drill 4x through holes 5mm", "tools": ["5mm sharp carbide drill"]},
+    {"operation": "edge_break", "description": "Deburr edges", "tools": ["deburring tool"]}
+  ],
+  "expected_tooling_assumptions": [
+    "sharp carbide end mills (6 mm) for plastic",
+    "face mill with sharp inserts",
+    "sharp carbide drills",
+    "deburring tool",
+    "mist coolant or air blast for chip evacuation"
+  ],
+  "expected_dfm_risks": [
+    {"severity": "LOW", "category": "plastic_machining", "message": "Delrin requires sharp tooling and chip management; standard feeds work."}
+  ],
+  "expected_quote_decision": "quote_ready",
+  "expected_proof_requirement": {
+    "requires_cam_simulation": true,
+    "requires_gcode": true,
+    "requires_toolpath": true,
+    "reason_not_applicable": ""
+  }
+}

@@ -1,0 +1,43 @@
+{
+  "fixture_id": "fixture-007-tight-tolerance",
+  "name": "Tight Tolerance Feature Plate — Steel",
+  "capability_class": {
+    "material_group": "steel",
+    "geometry_complexity": "moderate",
+    "tolerance_class": "tight",
+    "operation_types": ["face", "pocket", "drill", "bore"]
+  },
+  "material": "Steel 1018",
+  "quantity": 10,
+  "tolerance": "+/- 0.012 mm on critical bore, +/- 0.05 mm general",
+  "finish": "Ra 0.8 um on sealing face, machined elsewhere",
+  "missing_info": ["Surface finish specification missing for non-sealing faces"],
+  "expected_setup_class": "single_setup",
+  "expected_setup_count": 1,
+  "expected_operations": [
+    {"operation": "face_mill", "description": "Face mill sealing surface", "tools": ["50mm face mill"]},
+    {"operation": "rough_pocket", "description": "Rough pocket", "tools": ["10mm end mill"]},
+    {"operation": "finish_pocket", "description": "Finish pocket to tolerance", "tools": ["8mm end mill"]},
+    {"operation": "drill", "description": "Drill 4x through holes", "tools": ["8mm carbide drill"]},
+    {"operation": "bore_tight", "description": "Bore critical hole to +/- 0.012 mm", "tools": ["precision boring head"]},
+    {"operation": "chamfer", "description": "Chamfer edges", "tools": ["chamfer tool"]}
+  ],
+  "expected_tooling_assumptions": [
+    "AlTiN-coated carbide end mills (8, 10 mm)",
+    "face mill with sharp inserts for steel",
+    "carbide drills",
+    "precision boring head for tight tolerance bore",
+    "chamfer tool"
+  ],
+  "expected_dfm_risks": [
+    {"severity": "MEDIUM", "category": "tight_tolerance", "message": "+/- 0.012 mm bore requires precision boring or grinding."},
+    {"severity": "LOW", "category": "missing_info", "message": "Non-sealing face finish not specified."}
+  ],
+  "expected_quote_decision": "needs_review",
+  "expected_proof_requirement": {
+    "requires_cam_simulation": true,
+    "requires_gcode": true,
+    "requires_toolpath": true,
+    "reason_not_applicable": ""
+  }
+}

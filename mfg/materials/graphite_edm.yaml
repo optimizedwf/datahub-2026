@@ -1,0 +1,42 @@
+# Graphite (EDM electrode) — Material Profile
+# Conservative advisory feeds and speeds for CNC milling of graphite electrodes.
+# ADVISORY ONLY: dust control required. No production authorization.
+
+material:
+  name: "Graphite EDM"
+  grade: "EDM"
+  family: "graphite"
+
+  hardness_hb: 50
+  tensile_mpa: 40
+
+  recommended_tooling:
+    - diamond_coated_carbide
+    - carbide
+
+  feeds_speeds:
+    face_mill:
+      surface_speed_m_per_min: 200
+      feed_per_tooth_mm: 0.08
+      doc_max_mm: 1.0
+
+    end_mill:
+      surface_speed_m_per_min: 180
+      feed_per_tooth_mm: 0.05
+      doc_max_mm: 0.4
+      doc_radial_max_pct: 35
+
+    drill:
+      surface_speed_m_per_min: 100
+      feed_per_rev_mm: 0.08
+      peck_depth_mm: 1.5
+
+  coolant:
+    recommended: "dry_dust_extraction"
+    notes: "Dry machining with dedicated dust extraction. Graphite dust is abrasive and conductive — protect machine ways and electronics."
+
+  notes:
+    - "Graphite is abrasive; expect accelerated tool wear"
+    - "Dust extraction mandatory; respiratory protection per shop policy"
+    - "Profile is a conservative planning default, not production authorization"
+    - "ADVISORY ONLY — qualified machinist review required"

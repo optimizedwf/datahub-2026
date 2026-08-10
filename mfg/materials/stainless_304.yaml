@@ -1,0 +1,44 @@
+# 304 Stainless Steel — Material Profile
+# Conservative default feeds and speeds for CNC milling.
+# ADVISORY ONLY: no controller connection, no production authorization.
+# Qualified machinist review required before any real machining.
+
+material:
+  name: "Stainless Steel 304"
+  grade: "304"
+  family: "stainless"
+
+  hardness_hb: 201 # Brinell annealed (~150-200+)
+  tensile_mpa: 515
+
+  recommended_tooling:
+    - carbide # Preferred; sharp geometry, coated if available
+    - coated_carbide
+
+  feeds_speeds:
+    face_mill:
+      surface_speed_m_per_min: 90 # 60-120 m/min carbide
+      feed_per_tooth_mm: 0.06 # 0.04-0.10 mm/tooth
+      doc_max_mm: 1.0
+
+    end_mill:
+      surface_speed_m_per_min: 70 # 50-100 m/min carbide
+      feed_per_tooth_mm: 0.035 # 0.02-0.05 mm/tooth (per mm diameter)
+      doc_max_mm: 0.35 # Conservative axial DOC (work-hardening risk)
+      doc_radial_max_pct: 30 # % of tool diameter
+
+    drill:
+      surface_speed_m_per_min: 40 # 30-60 m/min carbide
+      feed_per_rev_mm: 0.08 # 0.05-0.12 mm/rev
+      peck_depth_mm: 0.8 # Peck to break chips; stainless strings
+
+  coolant:
+    recommended: "flood"
+    notes: "Flood coolant required; through-tool preferred for deep holes. Keep cutting edge cool to limit work hardening."
+
+  notes:
+    - "304 work-hardens readily — maintain positive feed, avoid dwell/rubbing"
+    - "Sharp carbide tooling preferred; dull tools accelerate hardening"
+    - "Rigid setup and strong chip evacuation recommended"
+    - "Profile is a conservative planning default, not a production cutting-data authorization"
+    - "ADVISORY ONLY — qualified machinist review required"

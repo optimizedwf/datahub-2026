@@ -1,0 +1,33 @@
+{
+  "fixture_id": "fixture-014-face-mill-plate",
+  "name": "Face Mill Plate — Aluminum",
+  "capability_class": {
+    "material_group": "aluminum",
+    "geometry_complexity": "simple",
+    "tolerance_class": "standard",
+    "operation_types": ["face"]
+  },
+  "material": "Aluminum 6061-T6",
+  "quantity": 200,
+  "tolerance": "+/- 0.2 mm",
+  "finish": "As machined, break all edges 0.5 mm max",
+  "missing_info": [],
+  "expected_setup_class": "single_setup",
+  "expected_setup_count": 1,
+  "expected_operations": [
+    {"operation": "face_mill", "description": "Face mill top and bottom to thickness", "tools": ["50mm face mill"]},
+    {"operation": "chamfer", "description": "Chamfer perimeter edges", "tools": ["chamfer tool"]}
+  ],
+  "expected_tooling_assumptions": [
+    "face mill 50 mm with carbide inserts",
+    "chamfer tool"
+  ],
+  "expected_dfm_risks": [],
+  "expected_quote_decision": "quote_ready",
+  "expected_proof_requirement": {
+    "requires_cam_simulation": true,
+    "requires_gcode": true,
+    "requires_toolpath": true,
+    "reason_not_applicable": ""
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "fixture_id": "fixture-010-odd-material-brass",
+  "name": "Brass Face + Drill Plate",
+  "capability_class": {
+    "material_group": "brass",
+    "geometry_complexity": "simple",
+    "tolerance_class": "standard",
+    "operation_types": ["face", "drill"]
+  },
+  "material": "Brass 360",
+  "quantity": 40,
+  "tolerance": "+/- 0.1 mm",
+  "finish": "Machined finish",
+  "missing_info": [],
+  "expected_setup_class": "single_setup",
+  "expected_setup_count": 1,
+  "expected_operations": [
+    {"operation": "face_mill", "description": "Face mill to thickness", "tools": ["50mm face mill"]},
+    {"operation": "drill", "description": "Drill 6x 5mm through holes", "tools": ["5mm carbide drill"]},
+    {"operation": "chamfer", "description": "Chamfer edges", "tools": ["chamfer tool"]}
+  ],
+  "expected_tooling_assumptions": [
+    "sharp carbide end mills for brass",
+    "face mill",
+    "carbide drills",
+    "chamfer tool",
+    "mist coolant recommended for brass chip control"
+  ],
+  "expected_dfm_risks": [
+    {"severity": "LOW", "category": "material_machinability", "message": "Brass 360 is free-machining; standard tooling works with reduced feeds."}
+  ],
+  "expected_quote_decision": "quote_ready",
+  "expected_proof_requirement": {
+    "requires_cam_simulation": true,
+    "requires_gcode": true,
+    "requires_toolpath": true,
+    "reason_not_applicable": ""
+  }
+}

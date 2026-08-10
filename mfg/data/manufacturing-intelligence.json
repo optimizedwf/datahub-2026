@@ -1,0 +1,528 @@
+{
+  "manufacturability_score": {
+    "overall": 99,
+    "max": 100,
+    "complexity": "Low",
+    "estimated_setups": 1,
+    "estimated_tool_changes": 1,
+    "deepest_pocket_mm": 0,
+    "minimum_wall_thickness_mm": 12.7,
+    "undercuts": "None",
+    "thin_wall_risk": "Low",
+    "tool_accessibility": "High",
+    "inspection_difficulty": "Low",
+    "overall_confidence": "High"
+  },
+  "operations_with_reasoning": [
+    {
+      "op_number": 10,
+      "description": "Face top surface",
+      "category": "facing",
+      "tool_number": 1,
+      "tool_label": "T1",
+      "strategy": "zigzag",
+      "features": [
+        "face-003"
+      ],
+      "cutting_parameters": {
+        "spindle_rpm": 2546,
+        "feed_mm_per_min": 1528,
+        "feed_mm_per_tooth": 0.15,
+        "surface_speed_m_per_min": 400,
+        "axial_doc_mm": 1.5,
+        "radial_stepover_mm": 40.0,
+        "radial_stepover_pct": 80,
+        "approach": "plunge_off_stock",
+        "coolant": "flood"
+      },
+      "geometry": {
+        "type": "rectangular",
+        "start_x": -5.0,
+        "start_y": -5.0,
+        "end_x": 125.0,
+        "end_y": 95.0,
+        "pass_direction": "climb",
+        "stepover_pattern": "parallel"
+      },
+      "depth_control": {
+        "reference": "stock_top",
+        "final_z_mm": -1.5,
+        "total_depth_mm": 1.5,
+        "passes": 1,
+        "finish_allowance_mm": 0.0
+      },
+      "notes": "Clean up stock surface. Establish Z zero after facing.",
+      "reasoning": {
+        "note": "No reasoning available for operation type: "
+      }
+    },
+    {
+      "op_number": 20,
+      "description": "Rough pocket-001",
+      "category": "roughing",
+      "tool_number": 2,
+      "tool_label": "T2",
+      "strategy": "adaptive_trochoidal",
+      "features": [
+        "pocket-001",
+        "bridge-contour-005"
+      ],
+      "cutting_parameters": {
+        "spindle_rpm": 8100,
+        "feed_mm_per_min": 972,
+        "feed_mm_per_tooth": 0.03,
+        "surface_speed_m_per_min": 152.7,
+        "axial_doc_mm": 1.0,
+        "radial_stepover_mm": 3.0,
+        "radial_stepover_pct": 50,
+        "plunge_feed_mm_per_min": 300,
+        "plunge_type": "helical",
+        "coolant": "flood"
+      },
+      "geometry": {
+        "type": "pocket_round",
+        "center_x": 30.0,
+        "center_y": 65.0,
+        "diameter_mm": 10.0,
+        "boundary_ref": "bridge-contour-005",
+        "pass_direction": "climb"
+      },
+      "depth_control": {
+        "reference": "top_face",
+        "final_z_mm": -7.5,
+        "total_depth_mm": 7.5,
+        "passes": 8,
+        "finish_allowance_mm": 0.3,
+        "finish_allowance_radial_mm": 0.3
+      },
+      "notes": "Adaptive clearing inside bridge-contour-005. Leave 0.3 mm for finishing.",
+      "reasoning": {
+        "note": "No reasoning available for operation type: "
+      }
+    },
+    {
+      "op_number": 30,
+      "description": "Finish pocket-001",
+      "category": "finishing",
+      "tool_number": 2,
+      "tool_label": "T2",
+      "strategy": "contour_parallel",
+      "features": [
+        "pocket-001",
+        "bridge-contour-005"
+      ],
+      "cutting_parameters": {
+        "spindle_rpm": 8100,
+        "feed_mm_per_min": 600,
+        "feed_mm_per_tooth": 0.0185,
+        "surface_speed_m_per_min": 152.7,
+        "axial_doc_mm": 0.25,
+        "radial_doc_mm": 0.3,
+        "coolant": "flood"
+      },
+      "geometry": {
+        "type": "pocket_round",
+        "center_x": 30.0,
+        "center_y": 65.0,
+        "diameter_mm": 10.0,
+        "boundary_ref": "bridge-contour-005",
+        "pass_direction": "climb"
+      },
+      "depth_control": {
+        "reference": "top_face",
+        "final_z_mm": -7.5,
+        "total_depth_mm": 7.5,
+        "finish_pass_wall": true,
+        "finish_pass_floor": true
+      },
+      "notes": "Finish wall contour at full depth, then clean floor.",
+      "reasoning": {
+        "note": "No reasoning available for operation type: "
+      }
+    },
+    {
+      "op_number": 40,
+      "description": "Rough pocket-002",
+      "category": "roughing",
+      "tool_number": 2,
+      "tool_label": "T2",
+      "strategy": "adaptive_trochoidal",
+      "features": [
+        "pocket-002",
+        "bridge-contour-006"
+      ],
+      "cutting_parameters": {
+        "spindle_rpm": 8100,
+        "feed_mm_per_min": 972,
+        "feed_mm_per_tooth": 0.03,
+        "surface_speed_m_per_min": 152.7,
+        "axial_doc_mm": 1.0,
+        "radial_stepover_mm": 3.0,
+        "radial_stepover_pct": 50,
+        "plunge_feed_mm_per_min": 300,
+        "plunge_type": "helical",
+        "coolant": "flood"
+      },
+      "geometry": {
+        "type": "pocket_round",
+        "center_x": 99.0,
+        "center_y": 60.0,
+        "diameter_mm": 10.0,
+        "boundary_ref": "bridge-contour-006",
+        "pass_direction": "climb"
+      },
+      "depth_control": {
+        "reference": "top_face",
+        "final_z_mm": -7.5,
+        "total_depth_mm": 7.5,
+        "passes": 8,
+        "finish_allowance_mm": 0.3,
+        "finish_allowance_radial_mm": 0.3
+      },
+      "notes": "Adaptive clearing inside bridge-contour-006. Leave 0.3 mm for finishing.",
+      "reasoning": {
+        "note": "No reasoning available for operation type: "
+      }
+    },
+    {
+      "op_number": 50,
+      "description": "Finish pocket-002",
+      "category": "finishing",
+      "tool_number": 2,
+      "tool_label": "T2",
+      "strategy": "contour_parallel",
+      "features": [
+        "pocket-002",
+        "bridge-contour-006"
+      ],
+      "cutting_parameters": {
+        "spindle_rpm": 8100,
+        "feed_mm_per_min": 600,
+        "feed_mm_per_tooth": 0.0185,
+        "surface_speed_m_per_min": 152.7,
+        "axial_doc_mm": 0.25,
+        "radial_doc_mm": 0.3,
+        "coolant": "flood"
+      },
+      "geometry": {
+        "type": "pocket_round",
+        "center_x": 99.0,
+        "center_y": 60.0,
+        "diameter_mm": 10.0,
+        "boundary_ref": "bridge-contour-006",
+        "pass_direction": "climb"
+      },
+      "depth_control": {
+        "reference": "top_face",
+        "final_z_mm": -7.5,
+        "total_depth_mm": 7.5,
+        "finish_pass_wall": true,
+        "finish_pass_floor": true
+      },
+      "notes": "Finish wall contour at full depth, then clean floor.",
+      "reasoning": {
+        "note": "No reasoning available for operation type: "
+      }
+    },
+    {
+      "op_number": 60,
+      "description": "Spot drill all through holes",
+      "category": "drilling",
+      "tool_number": 3,
+      "tool_label": "T3",
+      "strategy": "spot_drill",
+      "features": [
+        "hole-001",
+        "hole-002",
+        "hole-003",
+        "hole-004"
+      ],
+      "cutting_parameters": {
+        "spindle_rpm": 4000,
+        "feed_mm_per_min": 400,
+        "feed_mm_per_rev": 0.1,
+        "surface_speed_m_per_min": 125.7,
+        "dwell_seconds": 0.25,
+        "coolant": "flood"
+      },
+      "geometry": {
+        "type": "point_to_point",
+        "holes": [
+          {
+            "id": "hole-001",
+            "x": 15.0,
+            "y": 15.0
+          },
+          {
+            "id": "hole-002",
+            "x": 105.0,
+            "y": 15.0
+          },
+          {
+            "id": "hole-003",
+            "x": 15.0,
+            "y": 75.0
+          },
+          {
+            "id": "hole-004",
+            "x": 105.0,
+            "y": 75.0
+          }
+        ]
+      },
+      "depth_control": {
+        "reference": "top_face",
+        "final_z_mm": -2.0,
+        "cycle": "G81",
+        "dwell": true
+      },
+      "notes": "90\u00b0 spot drill to create ~1mm chamfer entry for each hole.",
+      "reasoning": {
+        "note": "No reasoning available for operation type: "
+      }
+    },
+    {
+      "op_number": 70,
+      "description": "Drill through holes to 6mm",
+      "category": "drilling",
+      "tool_number": 4,
+      "tool_label": "T4",
+      "strategy": "peck_drill",
+      "features": [
+        "hole-001",
+        "hole-002",
+        "hole-003",
+        "hole-004"
+      ],
+      "cutting_parameters": {
+        "spindle_rpm": 6366,
+        "feed_mm_per_min": 955,
+        "feed_mm_per_rev": 0.15,
+        "surface_speed_m_per_min": 120.0,
+        "peck_depth_mm": 2.0,
+        "coolant": "flood"
+      },
+      "geometry": {
+        "type": "point_to_point",
+        "holes": [
+          {
+            "id": "hole-001",
+            "x": 15.0,
+            "y": 15.0
+          },
+          {
+            "id": "hole-002",
+            "x": 105.0,
+            "y": 15.0
+          },
+          {
+            "id": "hole-003",
+            "x": 15.0,
+            "y": 75.0
+          },
+          {
+            "id": "hole-004",
+            "x": 105.0,
+            "y": 75.0
+          }
+        ]
+      },
+      "depth_control": {
+        "reference": "top_face",
+        "final_z_mm": -17.5,
+        "total_depth_mm": 15.0,
+        "through_hole": true,
+        "breakthrough_mm": 2.5,
+        "cycle": "G83",
+        "peck_depth_mm": 2.0
+      },
+      "notes": "Peck drill with G83, 2mm peck increments. Drill 2.5mm past stock bottom to ensure clean through-hole.",
+      "reasoning": {
+        "note": "No reasoning available for operation type: "
+      }
+    },
+    {
+      "op_number": 80,
+      "description": "Rough & finish external contour",
+      "category": "contouring",
+      "tool_number": 2,
+      "tool_label": "T2",
+      "strategy": "contour_rough_finish",
+      "features": [
+        "bridge-contour-007"
+      ],
+      "passes": [
+        {
+          "pass_type": "rough",
+          "spindle_rpm": 8100,
+          "feed_mm_per_min": 972,
+          "axial_doc_mm": 7.5,
+          "radial_doc_mm": 3.0,
+          "finish_allowance_mm": 0.1
+        },
+        {
+          "pass_type": "rough",
+          "spindle_rpm": 8100,
+          "feed_mm_per_min": 972,
+          "axial_doc_mm": 7.5,
+          "radial_doc_mm": 3.0,
+          "finish_allowance_mm": 0.1,
+          "z_start_mm": -7.5
+        },
+        {
+          "pass_type": "finish",
+          "spindle_rpm": 8100,
+          "feed_mm_per_min": 600,
+          "axial_doc_mm": 15.0,
+          "radial_doc_mm": 0.1
+        }
+      ],
+      "cutting_parameters": {
+        "surface_speed_m_per_min": 152.7,
+        "ramp_in": true,
+        "ramp_angle_deg": 5.0,
+        "coolant": "flood"
+      },
+      "geometry": {
+        "type": "contour",
+        "boundary_ref": "bridge-contour-007",
+        "pass_direction": "climb",
+        "cutter_comp": "G41"
+      },
+      "depth_control": {
+        "reference": "top_face",
+        "final_z_mm": -15.0,
+        "total_depth_mm": 15.0,
+        "rough_passes": 2,
+        "finish_passes": 1,
+        "finish_allowance_mm": 0.1
+      },
+      "notes": "Two rough passes at Z-7.5 and Z-15, then full-depth finish pass with cutter comp.",
+      "reasoning": {
+        "note": "No reasoning available for operation type: "
+      }
+    },
+    {
+      "op_number": 90,
+      "description": "Deburr and chamfer all exposed edges",
+      "category": "finishing",
+      "tool_number": 5,
+      "tool_label": "T5",
+      "strategy": "edge_break",
+      "features": [
+        "bridge-contour-007",
+        "bridge-contour-005",
+        "bridge-contour-006",
+        "hole-001",
+        "hole-002",
+        "hole-003",
+        "hole-004"
+      ],
+      "cutting_parameters": {
+        "spindle_rpm": 4000,
+        "feed_mm_per_min": 500,
+        "feed_mm_per_tooth": 0.0625,
+        "surface_speed_m_per_min": 125.7,
+        "chamfer_width_mm": 0.5,
+        "coolant": "flood"
+      },
+      "geometry": {
+        "type": "contour_and_holes",
+        "chamfer_pattern": "top_edges_only",
+        "pass_direction": "climb"
+      },
+      "depth_control": {
+        "reference": "top_face",
+        "chamfer_z_mm": -0.5,
+        "approach": "from_above"
+      },
+      "notes": "Break all sharp edges with 0.5mm chamfer. Trace part contour, pocket perimeters, and hole rims.",
+      "reasoning": {
+        "note": "No reasoning available for operation type: "
+      }
+    }
+  ],
+  "workholding": {
+    "primary": "6-inch vise with parallels",
+    "reasoning": "Part size (152.4\u00d788.9mm) fits comfortably in a standard 6-inch vise (typical jaw opening 0-150mm). Full perimeter accessible for contouring and slotting. No internal features compromise rigidity. Parallels provide 10-12mm clearance for through-hole drilling and through-slot cutting. Part thickness (9.5mm) allows adequate clamping force without distortion.",
+    "alternatives": [
+      "Soft jaws (recommended for 25-part production) \u2014 custom machined to part profile, reduces setup time per part, better positional repeatability",
+      "Tombstone fixture (for unattended lights-out production) \u2014 multiple parts per setup",
+      "Vacuum table (if surface finish priority) \u2014 eliminates vise jaw marks, preferred for thin plates"
+    ],
+    "setup_count": 1,
+    "setup_notes": "Single setup sufficient: all operations accessible from top side. Through-holes and through-slot achievable with parallels providing clearance below part. No second operation required. Recommended: probe workpiece for Z-zero and corner offset before starting cycle.",
+    "clamping_force_note": "Vise clamping force should be moderate (500-800 N) to avoid distorting 9.5mm plate. Clamp on 152.4mm dimension for maximum rigidity. Center part in vise jaws."
+  },
+  "engineering_review": {
+    "checks_passed": [
+      "Fits in a standard 6-inch vise",
+      "One setup expected \u2014 all features accessible from top",
+      "No undercuts detected",
+      "Standard tooling sufficient (4 unique tools)",
+      "No custom fixtures anticipated",
+      "All features manufacturable with 3-axis VMC",
+      "Pocket corner radius compatible with selected cutter",
+      "Slot width accommodates standard end mill",
+      "Hole spacing manufacturable (\u22652\u00d7 hole diameter from edges and other holes)",
+      "No trapped tools or inaccessible features"
+    ],
+    "potential_improvements": [
+      "\u00b10.005\" (0.127mm) tolerance appears tighter than necessary for a mounting plate with standard features. Relaxing to \u00b10.010\" could reduce machining time and cost by ~10-15% while maintaining functional requirements.",
+      "Pocket corner radius (3.175mm / 0.125\") is tight. Increasing to 4.76mm (3/16\") would allow using a 3/8\" end mill for faster material removal (2.8\u00d7 more volume per pass).",
+      "Slot width (6.35mm / 0.250\") could be specified at 6.0mm to use a single 6mm end mill for both pocket and slot operations without dedicated finish pass \u2014 reducing one tool change."
+    ],
+    "questions_raised": [
+      "Preferred machine type? (3-axis VMC with CAT40 spindle assumed in CAM plan)",
+      "Surface finish specification? (Ra not specified \u2014 standard machined finish \u22643.2\u03bcm assumed)",
+      "Inspection method and AQL? (CMM, pin gauges, or go/no-go for hole positions?)",
+      "Thread requirements? (4\u00d7 \u00d86.53mm through-holes \u2014 tapped? If so, thread spec needed)",
+      "Part marking requirements? (Laser etch part number or date code?)",
+      "Edge break specification? (0.005\" max chamfer or per internal standard?)"
+    ],
+    "ai_review_summary": "AI Manufacturing Engineer Review \u2014 99/100. Low complexity part. Standard tooling. One setup. No high-risk features detected. Part is well-designed for manufacturing. Recommended: tolerance relaxation and corner radius increase could reduce cost without sacrificing function.",
+    "knowledge_base_rules": {
+      "knowledge_base_path": "/home/chow/chow-work/ai-cnc-programmer/knowledge/manufacturing-knowledge.md",
+      "source": "TITANS of CNC / Weiss Watch Company factory tour (2026-06-16) - https://www.youtube.com/watch?v=KRNMoTi4aD0",
+      "applicable_rules": []
+    }
+  },
+  "quote_assumptions": {
+    "known": [
+      "Material: 6061-T6 aluminum",
+      "Quantity: 25 pcs",
+      "Thickness: 9.525mm (0.375\")",
+      "Overall size: 152.4mm \u00d7 88.9mm (6.000\" \u00d7 3.500\")",
+      "Tolerance: \u00b10.005\" (\u00b10.127mm)"
+    ],
+    "assumed": [
+      "Stock: 0.500\" (12.7mm) 6061-T6 plate, saw cut to 165.1mm \u00d7 101.6mm (allowing 0.125\" saw cut + 0.125\" finish allowance per edge)",
+      "Setup: Single vise setup with parallels, one operation",
+      "Cycle time: ~6-8 minutes per part at qty 25 (includes tool change time for 4 unique tools)",
+      "Machine: 3-axis VMC with CAT40 spindle, 10k+ RPM, through-spindle coolant",
+      "Tooling: Standard carbide end mills and drill from common catalog (no custom tools required)"
+    ],
+    "missing": [
+      "Surface finish specification (Ra value)",
+      "Preferred machine brand/controller (Fanuc, Haas, Siemens?)",
+      "Inspection method and acceptable quality level",
+      "Part marking or serialization requirements",
+      "Packaging and delivery specifications",
+      "Thread specifications (if holes require tapping)"
+    ],
+    "provisional_estimate": {
+      "setup_hours": 1.0,
+      "cycle_minutes_per_part": 7,
+      "tooling_cost_estimate": 75.0,
+      "material_cost_per_part": 3.5,
+      "material_cost_note": "Based on ~213 cm\u00b3 6061-T6 at ~$15/kg. Roughly 0.58 kg per blank.",
+      "estimated_unit_price_range": [
+        22,
+        35
+      ],
+      "estimate_note": "Range depends on shop rate ($60-95/hr). Lower end assumes standard vise, single setup, 7 min cycle. Upper end includes first-article inspection and soft jaw workholding.",
+      "confidence": "Medium"
+    }
+  },
+  "ai_review_summary": "AI Manufacturing Engineer Review \u2014 99/100. Low complexity part. 1 unique tools. 1 setup(s). No high-risk features detected. Part is well-designed for manufacturing with standard tooling."
+}

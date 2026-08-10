@@ -1,0 +1,207 @@
+{
+  "schema_version": "datahub-2026-eval-v1",
+  "frozen": "2026-08-05",
+  "best_of": 3,
+  "headline": {
+    "metadata": 0.95,
+    "plain": 0.7,
+    "paired_delta": 0.25
+  },
+  "per_question": [
+    {
+      "id": "h1",
+      "dataset": "healthcare",
+      "metadata_score": 1.0,
+      "plain_score": 1.0,
+      "delta": 0.0,
+      "metadata_sql": "SELECT COUNT(*) FROM mart_billing WHERE billing_amount < 0;",
+      "plain_sql": "SELECT COUNT(*) \nFROM mart_billing \nWHERE billing_amount < 0;"
+    },
+    {
+      "id": "h2",
+      "dataset": "healthcare",
+      "metadata_score": 1.0,
+      "plain_score": 1.0,
+      "delta": 0.0,
+      "metadata_sql": "SELECT COUNT(*) FROM mart_demographics WHERE name IS NULL;",
+      "plain_sql": "SELECT COUNT(*) FROM raw_patients WHERE name IS NULL;"
+    },
+    {
+      "id": "h3",
+      "dataset": "healthcare",
+      "metadata_score": 1.0,
+      "plain_score": 1.0,
+      "delta": 0.0,
+      "metadata_sql": "SELECT COUNT(*) FROM mart_demographics WHERE age < 0 OR age > 120;",
+      "plain_sql": "SELECT COUNT(*) \nFROM mart_demographics \nWHERE age < 0 OR age > 120;"
+    },
+    {
+      "id": "h4",
+      "dataset": "healthcare",
+      "metadata_score": 1.0,
+      "plain_score": 0.0,
+      "delta": 1.0,
+      "metadata_sql": "SELECT COUNT(*) FROM mart_billing WHERE date_of_admission > discharge_date;",
+      "plain_sql": null
+    },
+    {
+      "id": "h5",
+      "dataset": "healthcare",
+      "metadata_score": 1.0,
+      "plain_score": 1.0,
+      "delta": 0.0,
+      "metadata_sql": "SELECT SUM(billing_amount) AS total_negative_billing_amount FROM mart_billing WHERE billing_amount < 0;",
+      "plain_sql": "SELECT SUM(billing_amount) AS total_negative_billing_amount\nFROM mart_billing\nWHERE billing_amount < 0"
+    },
+    {
+      "id": "h6",
+      "dataset": "healthcare",
+      "metadata_score": 1.0,
+      "plain_score": 0.0,
+      "delta": 1.0,
+      "metadata_sql": "SELECT hospital\nFROM mart_billing\nWHERE billing_amount < 0\nGROUP BY hospital\nORDER BY COUNT(*) DESC, hospital ASC\nLIMIT 1;",
+      "plain_sql": null
+    },
+    {
+      "id": "h7",
+      "dataset": "healthcare",
+      "metadata_score": 1.0,
+      "plain_score": 1.0,
+      "delta": 0.0,
+      "metadata_sql": "SELECT AVG(billing_amount) AS average_billing_amount FROM mart_billing WHERE billing_amount >= 0;",
+      "plain_sql": "SELECT AVG(billing_amount) AS average_billing_amount FROM mart_billing WHERE billing_amount >= 0;"
+    },
+    {
+      "id": "h8",
+      "dataset": "healthcare",
+      "metadata_score": 1.0,
+      "plain_score": 0.0,
+      "delta": 1.0,
+      "metadata_sql": "SELECT COUNT(*) FROM mart_billing WHERE insurance_provider = 'UnitedHealthcare' AND billing_amount < 0;",
+      "plain_sql": null
+    },
+    {
+      "id": "h9",
+      "dataset": "healthcare",
+      "metadata_score": 1.0,
+      "plain_score": 1.0,
+      "delta": 0.0,
+      "metadata_sql": "SELECT medical_condition, COUNT(*) AS condition_count\nFROM mart_demographics\nWHERE age IS NULL OR age < 0 OR age > 120\nGROUP BY medical_condition\nORDER BY condition_count DESC\nLIMIT 1;",
+      "plain_sql": "SELECT medical_condition, COUNT(*) AS condition_count\nFROM mart_demographics\nWHERE age IS NULL OR age < 0 OR age > 120\nGROUP BY medical_condition\nORDER BY condition_count DESC\nLIMIT 1;"
+    },
+    {
+      "id": "h10",
+      "dataset": "healthcare",
+      "metadata_score": 1.0,
+      "plain_score": 1.0,
+      "delta": 0.0,
+      "metadata_sql": "SELECT admission_type, SUM(billing_amount) AS total_negative_billing\nFROM mart_billing\nWHERE billing_amount < 0\nGROUP BY admission_type\nORDER BY total_negative_billing ASC\nLIMIT 1;",
+      "plain_sql": "SELECT admission_type, SUM(billing_amount) AS total_negative_amount\nFROM mart_billing\nWHERE billing_amount < 0\nGROUP BY admission_type\nORDER BY total_negative_amount ASC\nLIMIT 1;"
+    },
+    {
+      "id": "t1",
+      "dataset": "nyc-taxi-pipeline",
+      "metadata_score": 1.0,
+      "plain_score": 1.0,
+      "delta": 0.0,
+      "metadata_sql": "SELECT MAX(tpep_pickup_datetime) AS most_recent_trip_date FROM raw_trips;",
+      "plain_sql": "SELECT MAX(tpep_pickup_datetime) AS most_recent_trip_date FROM raw_trips;"
+    },
+    {
+      "id": "t2",
+      "dataset": "nyc-taxi-pipeline",
+      "metadata_score": 1.0,
+      "plain_score": 1.0,
+      "delta": 0.0,
+      "metadata_sql": "SELECT MAX(trip_date) FROM mart_daily_summary;",
+      "plain_sql": "SELECT MAX(trip_date) FROM mart_daily_summary;"
+    },
+    {
+      "id": "t3",
+      "dataset": "nyc-taxi-pipeline",
+      "metadata_score": 0.0,
+      "plain_score": 0.0,
+      "delta": 0.0,
+      "metadata_sql": "SELECT MAX(CAST(trip_date AS DATE)) AS latest_mart_date, MAX(CAST(tpep_pickup_datetime AS DATE)) AS latest_raw_date\nFROM mart_daily_summary, raw_trips",
+      "plain_sql": null
+    },
+    {
+      "id": "t4",
+      "dataset": "nyc-taxi-pipeline",
+      "metadata_score": 1.0,
+      "plain_score": 0.0,
+      "delta": 1.0,
+      "metadata_sql": "SELECT trip_date, trip_count FROM mart_daily_summary ORDER BY trip_count ASC LIMIT 1;",
+      "plain_sql": null
+    },
+    {
+      "id": "t5",
+      "dataset": "nyc-taxi-pipeline",
+      "metadata_score": 1.0,
+      "plain_score": 1.0,
+      "delta": 0.0,
+      "metadata_sql": "SELECT MIN(trip_count) AS min_trip_count FROM mart_daily_summary;",
+      "plain_sql": "SELECT MIN(trip_count) FROM mart_daily_summary;"
+    },
+    {
+      "id": "t6",
+      "dataset": "nyc-taxi-pipeline",
+      "metadata_score": 1.0,
+      "plain_score": 1.0,
+      "delta": 0.0,
+      "metadata_sql": "SELECT \n    (SELECT COUNT(*) FROM staging_trips) AS staging_trips,\n    (SELECT COUNT(*) FROM raw_trips) AS raw_trips;",
+      "plain_sql": "SELECT \n    (SELECT COUNT(*) FROM staging_trips) AS staging_trips_count,\n    (SELECT COUNT(*) FROM raw_trips) AS raw_trips_count;"
+    },
+    {
+      "id": "f1",
+      "dataset": "fiction-retail",
+      "metadata_score": 1.0,
+      "plain_score": 1.0,
+      "delta": 0.0,
+      "metadata_sql": "SELECT COUNT(*) AS total_orders FROM orders;",
+      "plain_sql": "SELECT COUNT(*) FROM orders;"
+    },
+    {
+      "id": "f2",
+      "dataset": "fiction-retail",
+      "metadata_score": 1.0,
+      "plain_score": 1.0,
+      "delta": 0.0,
+      "metadata_sql": "SELECT country, COUNT(*) AS supplier_count FROM suppliers GROUP BY country ORDER BY supplier_count DESC LIMIT 1",
+      "plain_sql": "SELECT country, COUNT(*) AS supplier_count\nFROM suppliers\nGROUP BY country\nORDER BY supplier_count DESC\nLIMIT 1;"
+    },
+    {
+      "id": "f3",
+      "dataset": "fiction-retail",
+      "metadata_score": 1.0,
+      "plain_score": 1.0,
+      "delta": 0.0,
+      "metadata_sql": "SELECT order_status, COUNT(*) AS count FROM orders GROUP BY order_status ORDER BY count DESC LIMIT 1;",
+      "plain_sql": "SELECT order_status, COUNT(*) AS frequency \nFROM orders \nGROUP BY order_status \nORDER BY frequency DESC \nLIMIT 1;"
+    },
+    {
+      "id": "f4",
+      "dataset": "fiction-retail",
+      "metadata_score": 1.0,
+      "plain_score": 0.0,
+      "delta": 1.0,
+      "metadata_sql": "SELECT COUNT(*) FROM inventory WHERE quantity_on_hand < reorder_threshold;",
+      "plain_sql": null
+    }
+  ],
+  "control_delta": 0.25,
+  "write_back": {
+    "verified": true,
+    "urns": [
+      "urn:li:document:shared-34ea6184-69eb-470d-964f-693baa910174",
+      "urn:li:document:shared-8f032ddf-6fbc-4eaa-9e90-f0b7512d7650",
+      "urn:li:document:shared-09a86fc1-b874-4e32-83d7-8441525174f6"
+    ]
+  },
+  "repro": {
+    "llm_url": "http://127.0.0.1:3988/v1/chat/completions",
+    "llm_model": "deepseek.v3.2",
+    "datahub_server": "http://127.0.0.1:8080",
+    "cmd": "bash examples/eval.sh"
+  }
+}

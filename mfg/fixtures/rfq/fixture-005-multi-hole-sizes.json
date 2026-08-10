@@ -1,0 +1,41 @@
+{
+  "fixture_id": "fixture-005-multi-hole-sizes",
+  "name": "Multiple Hole Sizes — Steel",
+  "capability_class": {
+    "material_group": "steel",
+    "geometry_complexity": "moderate",
+    "tolerance_class": "standard",
+    "operation_types": ["face", "drill", "bore"]
+  },
+  "material": "Steel 1018",
+  "quantity": 20,
+  "tolerance": "+/- 0.05 mm on bore, +/- 0.1 mm general",
+  "finish": "Machined finish",
+  "missing_info": ["Bore depth callout not specified on drawing"],
+  "expected_setup_class": "single_setup",
+  "expected_setup_count": 1,
+  "expected_operations": [
+    {"operation": "face_mill", "description": "Face mill stock to size", "tools": ["50mm face mill"]},
+    {"operation": "drill_6mm", "description": "Drill 4x 6mm through holes", "tools": ["6mm carbide drill"]},
+    {"operation": "drill_10mm", "description": "Drill 2x 10mm through holes", "tools": ["10mm carbide drill"]},
+    {"operation": "bore", "description": "Bore 20mm through hole to tolerance", "tools": ["boring head"]},
+    {"operation": "chamfer", "description": "Chamfer all hole edges", "tools": ["chamfer tool"]}
+  ],
+  "expected_tooling_assumptions": [
+    "AlTiN-coated carbide end mills (6, 10 mm)",
+    "face mill with carbide inserts for steel",
+    "carbide drill set (6 mm, 10 mm)",
+    "precision boring head for 20 mm bore",
+    "chamfer tool"
+  ],
+  "expected_dfm_risks": [
+    {"severity": "LOW", "category": "missing_info", "message": "Bore depth not specified; requires customer clarification."}
+  ],
+  "expected_quote_decision": "needs_review",
+  "expected_proof_requirement": {
+    "requires_cam_simulation": true,
+    "requires_gcode": true,
+    "requires_toolpath": true,
+    "reason_not_applicable": ""
+  }
+}

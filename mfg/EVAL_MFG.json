@@ -1,0 +1,162 @@
+{
+  "schema_version": "datahub-2026-mfg-eval-v1",
+  "frozen": "2026-08-08",
+  "mode": "deterministic_decision_gate",
+  "total_cases": 22,
+  "cases": [
+    {
+      "id": "fixture-001-face-drill-plate",
+      "source": "rfq/fixture-001-face-drill-plate.json",
+      "material": "Aluminum 6061-T6",
+      "expected_decision": "quote_ready",
+      "has_missing_info": false
+    },
+    {
+      "id": "fixture-002-pocket-plate",
+      "source": "rfq/fixture-002-pocket-plate.json",
+      "material": "Aluminum 6061-T6",
+      "expected_decision": "quote_ready",
+      "has_missing_info": false
+    },
+    {
+      "id": "fixture-003-bolt-circle",
+      "source": "rfq/fixture-003-bolt-circle.json",
+      "material": "Aluminum 6061-T6",
+      "expected_decision": "quote_ready",
+      "has_missing_info": false
+    },
+    {
+      "id": "fixture-004-slot-chamfer",
+      "source": "rfq/fixture-004-slot-chamfer.json",
+      "material": "Aluminum 6061-T6",
+      "expected_decision": "quote_ready",
+      "has_missing_info": false
+    },
+    {
+      "id": "fixture-005-multi-hole-sizes",
+      "source": "rfq/fixture-005-multi-hole-sizes.json",
+      "material": "Steel 1018",
+      "expected_decision": "needs_review",
+      "has_missing_info": true
+    },
+    {
+      "id": "fixture-006-tapped-holes",
+      "source": "rfq/fixture-006-tapped-holes.json",
+      "material": "Aluminum 6061-T6",
+      "expected_decision": "quote_ready",
+      "has_missing_info": false
+    },
+    {
+      "id": "fixture-007-tight-tolerance",
+      "source": "rfq/fixture-007-tight-tolerance.json",
+      "material": "Steel 1018",
+      "expected_decision": "needs_review",
+      "has_missing_info": true
+    },
+    {
+      "id": "fixture-008-thin-wall",
+      "source": "rfq/fixture-008-thin-wall.json",
+      "material": "Aluminum 6061-T6",
+      "expected_decision": "needs_review",
+      "has_missing_info": true
+    },
+    {
+      "id": "fixture-009-deep-pocket",
+      "source": "rfq/fixture-009-deep-pocket.json",
+      "material": "Steel 1018",
+      "expected_decision": "needs_review",
+      "has_missing_info": true
+    },
+    {
+      "id": "fixture-010-odd-material-brass",
+      "source": "rfq/fixture-010-odd-material-brass.json",
+      "material": "Brass 360",
+      "expected_decision": "quote_ready",
+      "has_missing_info": false
+    },
+    {
+      "id": "fixture-011-two-sided-setup",
+      "source": "rfq/fixture-011-two-sided-setup.json",
+      "material": "Aluminum 6061-T6",
+      "expected_decision": "needs_review",
+      "has_missing_info": true
+    },
+    {
+      "id": "fixture-012-no-bid-inconel",
+      "source": "rfq/fixture-012-no-bid-inconel.json",
+      "material": "Inconel 718",
+      "expected_decision": "no_bid",
+      "has_missing_info": true
+    },
+    {
+      "id": "fixture-013-needs-review-missing-info",
+      "source": "rfq/fixture-013-needs-review-missing-info.json",
+      "material": "Aluminum 6061-T6",
+      "expected_decision": "needs_review",
+      "has_missing_info": true
+    },
+    {
+      "id": "fixture-014-face-mill-plate",
+      "source": "rfq/fixture-014-face-mill-plate.json",
+      "material": "Aluminum 6061-T6",
+      "expected_decision": "quote_ready",
+      "has_missing_info": false
+    },
+    {
+      "id": "fixture-015-contour-plate",
+      "source": "rfq/fixture-015-contour-plate.json",
+      "material": "Aluminum 6061-T6",
+      "expected_decision": "quote_ready",
+      "has_missing_info": false
+    },
+    {
+      "id": "fixture-016-plastic-delrin",
+      "source": "rfq/fixture-016-plastic-delrin.json",
+      "material": "Delrin (Acetal) 150",
+      "expected_decision": "quote_ready",
+      "has_missing_info": false
+    },
+    {
+      "id": "fixture-017-multi-depth-pocket",
+      "source": "rfq/fixture-017-multi-depth-pocket.json",
+      "material": "Aluminum 6061-T6",
+      "expected_decision": "needs_review",
+      "has_missing_info": true
+    },
+    {
+      "id": "fixture-018-thin-wall-plastic",
+      "source": "rfq/fixture-018-thin-wall-plastic.json",
+      "material": "Delrin (Acetal) 570",
+      "expected_decision": "needs_review",
+      "has_missing_info": true
+    },
+    {
+      "id": "fixture-019-no-bid-titanium",
+      "source": "rfq/fixture-019-no-bid-titanium.json",
+      "material": "Titanium Ti-6Al-4V",
+      "expected_decision": "no_bid",
+      "has_missing_info": true
+    },
+    {
+      "id": "fixture-020-tight-tolerance-steel",
+      "source": "rfq/fixture-020-tight-tolerance-steel.json",
+      "material": "Steel 4140",
+      "expected_decision": "needs_review",
+      "has_missing_info": true
+    },
+    {
+      "id": "kernel-001-proof-tapped-holes",
+      "source": "kernels/kernel-001-proof-tapped-holes.json",
+      "material": "Aluminum 6061-T6",
+      "expected_decision": "quote_ready",
+      "has_missing_info": false
+    },
+    {
+      "id": "kernel-002-no-bid-inconel",
+      "source": "kernels/kernel-002-no-bid-inconel.json",
+      "material": "Inconel 718",
+      "expected_decision": "no_bid",
+      "has_missing_info": true
+    }
+  ]
+}

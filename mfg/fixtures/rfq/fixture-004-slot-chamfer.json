@@ -1,0 +1,40 @@
+{
+  "fixture_id": "fixture-004-slot-chamfer",
+  "name": "Slot + Chamfer Plate — Aluminum",
+  "capability_class": {
+    "material_group": "aluminum",
+    "geometry_complexity": "moderate",
+    "tolerance_class": "standard",
+    "operation_types": ["face", "slot", "chamfer", "drill"]
+  },
+  "material": "Aluminum 6061-T6",
+  "quantity": 75,
+  "tolerance": "+/- 0.1 mm",
+  "finish": "Machined finish, break sharp edges 0.5 mm max",
+  "missing_info": [],
+  "expected_setup_class": "single_setup",
+  "expected_setup_count": 1,
+  "expected_operations": [
+    {"operation": "face_mill", "description": "Face mill to thickness", "tools": ["50mm face mill"]},
+    {"operation": "rough_slot", "description": "Rough open slot 12mm wide", "tools": ["10mm end mill"]},
+    {"operation": "finish_slot", "description": "Finish slot walls", "tools": ["12mm end mill"]},
+    {"operation": "drill", "description": "Drill 2x through holes 8mm", "tools": ["8mm carbide drill"]},
+    {"operation": "chamfer", "description": "Chamfer slot edges and holes", "tools": ["chamfer tool"]}
+  ],
+  "expected_tooling_assumptions": [
+    "carbide end mills (10 mm, 12 mm)",
+    "face mill",
+    "carbide drills (8 mm)",
+    "chamfer tool"
+  ],
+  "expected_dfm_risks": [
+    {"severity": "LOW", "category": "slot_aspect_ratio", "message": "Slot depth-to-width ratio within acceptable range."}
+  ],
+  "expected_quote_decision": "quote_ready",
+  "expected_proof_requirement": {
+    "requires_cam_simulation": true,
+    "requires_gcode": true,
+    "requires_toolpath": true,
+    "reason_not_applicable": ""
+  }
+}

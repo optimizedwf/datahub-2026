@@ -1,0 +1,730 @@
+{
+  "schema_version": "1",
+  "frozen": "2026-08-05",
+  "best_of": 3,
+  "modes": {
+    "metadata": {
+      "accuracy": 0.95,
+      "n": 20,
+      "details": [
+        {
+          "id": "h1",
+          "dataset": "healthcare",
+          "mode": "metadata",
+          "sql": "SELECT COUNT(*) FROM mart_billing WHERE billing_amount < 0;",
+          "rows": [
+            [
+              1215
+            ]
+          ],
+          "error": null,
+          "attempts": 1,
+          "bench_attempts": 1,
+          "used_metadata": true,
+          "score": 1.0,
+          "gold": "1215",
+          "write_back": null
+        },
+        {
+          "id": "h2",
+          "dataset": "healthcare",
+          "mode": "metadata",
+          "sql": "SELECT COUNT(*) FROM mart_demographics WHERE name IS NULL;",
+          "rows": [
+            [
+              555
+            ]
+          ],
+          "error": null,
+          "attempts": 1,
+          "bench_attempts": 1,
+          "used_metadata": true,
+          "score": 1.0,
+          "gold": "555",
+          "write_back": null
+        },
+        {
+          "id": "h3",
+          "dataset": "healthcare",
+          "mode": "metadata",
+          "sql": "SELECT COUNT(*) FROM mart_demographics WHERE age < 0 OR age > 120;",
+          "rows": [
+            [
+              832
+            ]
+          ],
+          "error": null,
+          "attempts": 1,
+          "bench_attempts": 1,
+          "used_metadata": true,
+          "score": 1.0,
+          "gold": "832",
+          "write_back": null
+        },
+        {
+          "id": "h4",
+          "dataset": "healthcare",
+          "mode": "metadata",
+          "sql": "SELECT COUNT(*) FROM mart_billing WHERE date_of_admission > discharge_date;",
+          "rows": [
+            [
+              277
+            ]
+          ],
+          "error": null,
+          "attempts": 1,
+          "bench_attempts": 1,
+          "used_metadata": true,
+          "score": 1.0,
+          "gold": "277",
+          "write_back": null
+        },
+        {
+          "id": "h5",
+          "dataset": "healthcare",
+          "mode": "metadata",
+          "sql": "SELECT SUM(billing_amount) AS total_negative_billing_amount FROM mart_billing WHERE billing_amount < 0;",
+          "rows": [
+            [
+              -28478287.846503545
+            ]
+          ],
+          "error": null,
+          "attempts": 1,
+          "bench_attempts": 1,
+          "used_metadata": true,
+          "score": 1.0,
+          "gold": "-28478287.85",
+          "write_back": null
+        },
+        {
+          "id": "h6",
+          "dataset": "healthcare",
+          "mode": "metadata",
+          "sql": "SELECT hospital\nFROM mart_billing\nWHERE billing_amount < 0\nGROUP BY hospital\nORDER BY COUNT(*) DESC, hospital ASC\nLIMIT 1;",
+          "rows": [
+            [
+              "Group Smith"
+            ]
+          ],
+          "error": null,
+          "attempts": 1,
+          "bench_attempts": 1,
+          "used_metadata": true,
+          "score": 1.0,
+          "gold": "Group Smith",
+          "write_back": null
+        },
+        {
+          "id": "h7",
+          "dataset": "healthcare",
+          "mode": "metadata",
+          "sql": "SELECT AVG(billing_amount) AS average_billing_amount FROM mart_billing WHERE billing_amount >= 0;",
+          "rows": [
+            [
+              25588.313615492854
+            ]
+          ],
+          "error": null,
+          "attempts": 1,
+          "bench_attempts": 1,
+          "used_metadata": true,
+          "score": 1.0,
+          "gold": "25588.31",
+          "write_back": null
+        },
+        {
+          "id": "h8",
+          "dataset": "healthcare",
+          "mode": "metadata",
+          "sql": "SELECT COUNT(*) FROM mart_billing WHERE insurance_provider = 'UnitedHealthcare' AND billing_amount < 0;",
+          "rows": [
+            [
+              233
+            ]
+          ],
+          "error": null,
+          "attempts": 1,
+          "bench_attempts": 1,
+          "used_metadata": true,
+          "score": 1.0,
+          "gold": "233",
+          "write_back": null
+        },
+        {
+          "id": "h9",
+          "dataset": "healthcare",
+          "mode": "metadata",
+          "sql": "SELECT medical_condition, COUNT(*) AS condition_count\nFROM mart_demographics\nWHERE age IS NULL OR age < 0 OR age > 120\nGROUP BY medical_condition\nORDER BY condition_count DESC\nLIMIT 1;",
+          "rows": [
+            [
+              "obesity",
+              157
+            ]
+          ],
+          "error": null,
+          "attempts": 1,
+          "bench_attempts": 1,
+          "used_metadata": true,
+          "score": 1.0,
+          "gold": "obesity",
+          "write_back": null
+        },
+        {
+          "id": "h10",
+          "dataset": "healthcare",
+          "mode": "metadata",
+          "sql": "SELECT admission_type, SUM(billing_amount) AS total_negative_billing\nFROM mart_billing\nWHERE billing_amount < 0\nGROUP BY admission_type\nORDER BY total_negative_billing ASC\nLIMIT 1;",
+          "rows": [
+            [
+              "urgent",
+              -9753511.150509443
+            ]
+          ],
+          "error": null,
+          "attempts": 1,
+          "bench_attempts": 1,
+          "used_metadata": true,
+          "score": 1.0,
+          "gold": "urgent",
+          "write_back": null
+        },
+        {
+          "id": "t1",
+          "dataset": "nyc-taxi-pipeline",
+          "mode": "metadata",
+          "sql": "SELECT MAX(tpep_pickup_datetime) AS most_recent_trip_date FROM raw_trips;",
+          "rows": [
+            [
+              "2016-03-10 10:48:55"
+            ]
+          ],
+          "error": null,
+          "attempts": 1,
+          "bench_attempts": 1,
+          "used_metadata": true,
+          "score": 1.0,
+          "gold": "2016-03-10",
+          "write_back": null
+        },
+        {
+          "id": "t2",
+          "dataset": "nyc-taxi-pipeline",
+          "mode": "metadata",
+          "sql": "SELECT MAX(trip_date) FROM mart_daily_summary;",
+          "rows": [
+            [
+              "2016-03-01"
+            ]
+          ],
+          "error": null,
+          "attempts": 1,
+          "bench_attempts": 1,
+          "used_metadata": true,
+          "score": 1.0,
+          "gold": "2016-03-01",
+          "write_back": null
+        },
+        {
+          "id": "t3",
+          "dataset": "nyc-taxi-pipeline",
+          "mode": "metadata",
+          "sql": "SELECT MAX(CAST(trip_date AS DATE)) AS latest_mart_date, MAX(CAST(tpep_pickup_datetime AS DATE)) AS latest_raw_date\nFROM mart_daily_summary, raw_trips",
+          "rows": [
+            [
+              2016,
+              2016
+            ]
+          ],
+          "error": null,
+          "attempts": 1,
+          "bench_attempts": 3,
+          "used_metadata": true,
+          "score": 0.0,
+          "gold": "9",
+          "write_back": null
+        },
+        {
+          "id": "t4",
+          "dataset": "nyc-taxi-pipeline",
+          "mode": "metadata",
+          "sql": "SELECT trip_date, trip_count FROM mart_daily_summary ORDER BY trip_count ASC LIMIT 1;",
+          "rows": [
+            [
+              "2016-02-25",
+              2
+            ]
+          ],
+          "error": null,
+          "attempts": 1,
+          "bench_attempts": 1,
+          "used_metadata": true,
+          "score": 1.0,
+          "gold": "2016-02-25",
+          "write_back": null
+        },
+        {
+          "id": "t5",
+          "dataset": "nyc-taxi-pipeline",
+          "mode": "metadata",
+          "sql": "SELECT MIN(trip_count) AS min_trip_count FROM mart_daily_summary;",
+          "rows": [
+            [
+              2
+            ]
+          ],
+          "error": null,
+          "attempts": 1,
+          "bench_attempts": 1,
+          "used_metadata": true,
+          "score": 1.0,
+          "gold": "2",
+          "write_back": null
+        },
+        {
+          "id": "t6",
+          "dataset": "nyc-taxi-pipeline",
+          "mode": "metadata",
+          "sql": "SELECT \n    (SELECT COUNT(*) FROM staging_trips) AS staging_trips,\n    (SELECT COUNT(*) FROM raw_trips) AS raw_trips;",
+          "rows": [
+            [
+              208675,
+              250000
+            ]
+          ],
+          "error": null,
+          "attempts": 1,
+          "bench_attempts": 1,
+          "used_metadata": true,
+          "score": 1.0,
+          "gold": "208675 vs 250000",
+          "write_back": null
+        },
+        {
+          "id": "f1",
+          "dataset": "fiction-retail",
+          "mode": "metadata",
+          "sql": "SELECT COUNT(*) AS total_orders FROM orders;",
+          "rows": [
+            [
+              150000
+            ]
+          ],
+          "error": null,
+          "attempts": 1,
+          "bench_attempts": 1,
+          "used_metadata": true,
+          "score": 1.0,
+          "gold": "150000",
+          "write_back": null
+        },
+        {
+          "id": "f2",
+          "dataset": "fiction-retail",
+          "mode": "metadata",
+          "sql": "SELECT country, COUNT(*) AS supplier_count FROM suppliers GROUP BY country ORDER BY supplier_count DESC LIMIT 1",
+          "rows": [
+            [
+              "US",
+              134
+            ]
+          ],
+          "error": null,
+          "attempts": 1,
+          "bench_attempts": 1,
+          "used_metadata": true,
+          "score": 1.0,
+          "gold": "US",
+          "write_back": null
+        },
+        {
+          "id": "f3",
+          "dataset": "fiction-retail",
+          "mode": "metadata",
+          "sql": "SELECT order_status, COUNT(*) AS count FROM orders GROUP BY order_status ORDER BY count DESC LIMIT 1;",
+          "rows": [
+            [
+              "delivered",
+              97540
+            ]
+          ],
+          "error": null,
+          "attempts": 1,
+          "bench_attempts": 1,
+          "used_metadata": true,
+          "score": 1.0,
+          "gold": "delivered",
+          "write_back": null
+        },
+        {
+          "id": "f4",
+          "dataset": "fiction-retail",
+          "mode": "metadata",
+          "sql": "SELECT COUNT(*) FROM inventory WHERE quantity_on_hand < reorder_threshold;",
+          "rows": [
+            [
+              575
+            ]
+          ],
+          "error": null,
+          "attempts": 1,
+          "bench_attempts": 1,
+          "used_metadata": true,
+          "score": 1.0,
+          "gold": "575",
+          "write_back": null
+        }
+      ]
+    },
+    "plain": {
+      "accuracy": 0.7,
+      "n": 20,
+      "details": [
+        {
+          "id": "h1",
+          "dataset": "healthcare",
+          "mode": "plain",
+          "sql": "SELECT COUNT(*) \nFROM mart_billing \nWHERE billing_amount < 0;",
+          "rows": [
+            [
+              1215
+            ]
+          ],
+          "error": null,
+          "attempts": 1,
+          "bench_attempts": 1,
+          "used_metadata": false,
+          "score": 1.0,
+          "gold": "1215",
+          "write_back": null
+        },
+        {
+          "id": "h2",
+          "dataset": "healthcare",
+          "mode": "plain",
+          "sql": "SELECT COUNT(*) FROM raw_patients WHERE name IS NULL;",
+          "rows": [
+            [
+              555
+            ]
+          ],
+          "error": null,
+          "attempts": 1,
+          "bench_attempts": 1,
+          "used_metadata": false,
+          "score": 1.0,
+          "gold": "555",
+          "write_back": null
+        },
+        {
+          "id": "h3",
+          "dataset": "healthcare",
+          "mode": "plain",
+          "sql": "SELECT COUNT(*) \nFROM mart_demographics \nWHERE age < 0 OR age > 120;",
+          "rows": [
+            [
+              832
+            ]
+          ],
+          "error": null,
+          "attempts": 1,
+          "bench_attempts": 1,
+          "used_metadata": false,
+          "score": 1.0,
+          "gold": "832",
+          "write_back": null
+        },
+        {
+          "id": "h4",
+          "dataset": "healthcare",
+          "mode": "plain",
+          "sql": null,
+          "rows": null,
+          "error": "all attempts failed",
+          "attempts": 3,
+          "bench_attempts": 3,
+          "used_metadata": false,
+          "score": 0.0,
+          "gold": "277",
+          "write_back": null
+        },
+        {
+          "id": "h5",
+          "dataset": "healthcare",
+          "mode": "plain",
+          "sql": "SELECT SUM(billing_amount) AS total_negative_billing_amount\nFROM mart_billing\nWHERE billing_amount < 0",
+          "rows": [
+            [
+              -28478287.846503545
+            ]
+          ],
+          "error": null,
+          "attempts": 1,
+          "bench_attempts": 1,
+          "used_metadata": false,
+          "score": 1.0,
+          "gold": "-28478287.85",
+          "write_back": null
+        },
+        {
+          "id": "h6",
+          "dataset": "healthcare",
+          "mode": "plain",
+          "sql": null,
+          "rows": null,
+          "error": "all attempts failed",
+          "attempts": 3,
+          "bench_attempts": 3,
+          "used_metadata": false,
+          "score": 0.0,
+          "gold": "Group Smith",
+          "write_back": null
+        },
+        {
+          "id": "h7",
+          "dataset": "healthcare",
+          "mode": "plain",
+          "sql": "SELECT AVG(billing_amount) AS average_billing_amount FROM mart_billing WHERE billing_amount >= 0;",
+          "rows": [
+            [
+              25588.313615492854
+            ]
+          ],
+          "error": null,
+          "attempts": 1,
+          "bench_attempts": 1,
+          "used_metadata": false,
+          "score": 1.0,
+          "gold": "25588.31",
+          "write_back": null
+        },
+        {
+          "id": "h8",
+          "dataset": "healthcare",
+          "mode": "plain",
+          "sql": null,
+          "rows": null,
+          "error": "all attempts failed",
+          "attempts": 3,
+          "bench_attempts": 3,
+          "used_metadata": false,
+          "score": 0.0,
+          "gold": "233",
+          "write_back": null
+        },
+        {
+          "id": "h9",
+          "dataset": "healthcare",
+          "mode": "plain",
+          "sql": "SELECT medical_condition, COUNT(*) AS condition_count\nFROM mart_demographics\nWHERE age IS NULL OR age < 0 OR age > 120\nGROUP BY medical_condition\nORDER BY condition_count DESC\nLIMIT 1;",
+          "rows": [
+            [
+              "obesity",
+              157
+            ]
+          ],
+          "error": null,
+          "attempts": 1,
+          "bench_attempts": 1,
+          "used_metadata": false,
+          "score": 1.0,
+          "gold": "obesity",
+          "write_back": null
+        },
+        {
+          "id": "h10",
+          "dataset": "healthcare",
+          "mode": "plain",
+          "sql": "SELECT admission_type, SUM(billing_amount) AS total_negative_amount\nFROM mart_billing\nWHERE billing_amount < 0\nGROUP BY admission_type\nORDER BY total_negative_amount ASC\nLIMIT 1;",
+          "rows": [
+            [
+              "urgent",
+              -9753511.150509443
+            ]
+          ],
+          "error": null,
+          "attempts": 1,
+          "bench_attempts": 1,
+          "used_metadata": false,
+          "score": 1.0,
+          "gold": "urgent",
+          "write_back": null
+        },
+        {
+          "id": "t1",
+          "dataset": "nyc-taxi-pipeline",
+          "mode": "plain",
+          "sql": "SELECT MAX(tpep_pickup_datetime) AS most_recent_trip_date FROM raw_trips;",
+          "rows": [
+            [
+              "2016-03-10 10:48:55"
+            ]
+          ],
+          "error": null,
+          "attempts": 1,
+          "bench_attempts": 1,
+          "used_metadata": false,
+          "score": 1.0,
+          "gold": "2016-03-10",
+          "write_back": null
+        },
+        {
+          "id": "t2",
+          "dataset": "nyc-taxi-pipeline",
+          "mode": "plain",
+          "sql": "SELECT MAX(trip_date) FROM mart_daily_summary;",
+          "rows": [
+            [
+              "2016-03-01"
+            ]
+          ],
+          "error": null,
+          "attempts": 1,
+          "bench_attempts": 1,
+          "used_metadata": false,
+          "score": 1.0,
+          "gold": "2016-03-01",
+          "write_back": null
+        },
+        {
+          "id": "t3",
+          "dataset": "nyc-taxi-pipeline",
+          "mode": "plain",
+          "sql": null,
+          "rows": null,
+          "error": "all attempts failed",
+          "attempts": 3,
+          "bench_attempts": 3,
+          "used_metadata": false,
+          "score": 0.0,
+          "gold": "9",
+          "write_back": null
+        },
+        {
+          "id": "t4",
+          "dataset": "nyc-taxi-pipeline",
+          "mode": "plain",
+          "sql": null,
+          "rows": null,
+          "error": "all attempts failed",
+          "attempts": 3,
+          "bench_attempts": 3,
+          "used_metadata": false,
+          "score": 0.0,
+          "gold": "2016-02-25",
+          "write_back": null
+        },
+        {
+          "id": "t5",
+          "dataset": "nyc-taxi-pipeline",
+          "mode": "plain",
+          "sql": "SELECT MIN(trip_count) FROM mart_daily_summary;",
+          "rows": [
+            [
+              2
+            ]
+          ],
+          "error": null,
+          "attempts": 1,
+          "bench_attempts": 1,
+          "used_metadata": false,
+          "score": 1.0,
+          "gold": "2",
+          "write_back": null
+        },
+        {
+          "id": "t6",
+          "dataset": "nyc-taxi-pipeline",
+          "mode": "plain",
+          "sql": "SELECT \n    (SELECT COUNT(*) FROM staging_trips) AS staging_trips_count,\n    (SELECT COUNT(*) FROM raw_trips) AS raw_trips_count;",
+          "rows": [
+            [
+              208675,
+              250000
+            ]
+          ],
+          "error": null,
+          "attempts": 1,
+          "bench_attempts": 1,
+          "used_metadata": false,
+          "score": 1.0,
+          "gold": "208675 vs 250000",
+          "write_back": null
+        },
+        {
+          "id": "f1",
+          "dataset": "fiction-retail",
+          "mode": "plain",
+          "sql": "SELECT COUNT(*) FROM orders;",
+          "rows": [
+            [
+              150000
+            ]
+          ],
+          "error": null,
+          "attempts": 1,
+          "bench_attempts": 1,
+          "used_metadata": false,
+          "score": 1.0,
+          "gold": "150000",
+          "write_back": null
+        },
+        {
+          "id": "f2",
+          "dataset": "fiction-retail",
+          "mode": "plain",
+          "sql": "SELECT country, COUNT(*) AS supplier_count\nFROM suppliers\nGROUP BY country\nORDER BY supplier_count DESC\nLIMIT 1;",
+          "rows": [
+            [
+              "US",
+              134
+            ]
+          ],
+          "error": null,
+          "attempts": 1,
+          "bench_attempts": 1,
+          "used_metadata": false,
+          "score": 1.0,
+          "gold": "US",
+          "write_back": null
+        },
+        {
+          "id": "f3",
+          "dataset": "fiction-retail",
+          "mode": "plain",
+          "sql": "SELECT order_status, COUNT(*) AS frequency \nFROM orders \nGROUP BY order_status \nORDER BY frequency DESC \nLIMIT 1;",
+          "rows": [
+            [
+              "delivered",
+              97540
+            ]
+          ],
+          "error": null,
+          "attempts": 1,
+          "bench_attempts": 1,
+          "used_metadata": false,
+          "score": 1.0,
+          "gold": "delivered",
+          "write_back": null
+        },
+        {
+          "id": "f4",
+          "dataset": "fiction-retail",
+          "mode": "plain",
+          "sql": null,
+          "rows": null,
+          "error": "all attempts failed",
+          "attempts": 3,
+          "bench_attempts": 3,
+          "used_metadata": false,
+          "score": 0.0,
+          "gold": "575",
+          "write_back": null
+        }
+      ]
+    }
+  },
+  "paired_delta": 0.25,
+  "shared_n": 20,
+  "control_delta": 0.25
+}

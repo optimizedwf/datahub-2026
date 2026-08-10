@@ -1,0 +1,41 @@
+{
+  "fixture_id": "fixture-006-tapped-holes",
+  "name": "Tapped Holes Plate — Aluminum",
+  "capability_class": {
+    "material_group": "aluminum",
+    "geometry_complexity": "moderate",
+    "tolerance_class": "standard",
+    "operation_types": ["face", "drill", "tap", "chamfer"]
+  },
+  "material": "Aluminum 6061-T6",
+  "quantity": 60,
+  "tolerance": "+/- 0.1 mm",
+  "finish": "Machined finish",
+  "missing_info": [],
+  "expected_setup_class": "single_setup",
+  "expected_setup_count": 1,
+  "expected_operations": [
+    {"operation": "face_mill", "description": "Face mill surface flat", "tools": ["50mm face mill"]},
+    {"operation": "spot_drill", "description": "Spot drill 8x tapped hole locations", "tools": ["spot drill"]},
+    {"operation": "drill_tap_holes", "description": "Drill 8x M6 tap drill holes", "tools": ["5mm carbide drill"]},
+    {"operation": "tap", "description": "Form tap M6x1.0 threads", "tools": ["M6 form tap"]},
+    {"operation": "chamfer", "description": "Chamfer hole openings", "tools": ["chamfer tool"]}
+  ],
+  "expected_tooling_assumptions": [
+    "carbide end mills (6 mm, 10 mm)",
+    "spot drill",
+    "carbide drill (5 mm)",
+    "M6 form tap",
+    "chamfer tool"
+  ],
+  "expected_dfm_risks": [
+    {"severity": "LOW", "category": "thread_depth", "message": "Thread depth ratio acceptable in aluminum."}
+  ],
+  "expected_quote_decision": "quote_ready",
+  "expected_proof_requirement": {
+    "requires_cam_simulation": true,
+    "requires_gcode": true,
+    "requires_toolpath": true,
+    "reason_not_applicable": ""
+  }
+}
