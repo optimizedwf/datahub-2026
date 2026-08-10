@@ -6,6 +6,7 @@ import json
 import os
 import sys
 import sqlite3
+import pytest
 
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "evals"))
 import benchmark  # noqa: E402
@@ -63,7 +64,11 @@ def test_repro_run_matches_frozen_scores():
 # ── dataset generators are importable / parse (no CSV needed) ─────────────
 
 def test_dataset_scripts_exist():
+    """Datasets are fetched by examples/fetch_datasets.sh (sha256-pinned);
+    skip if not fetched yet so CI stays green on a lean checkout."""
     root = os.path.join(os.path.dirname(__file__), "..")
+    if not os.path.isdir(os.path.join(root, "datasets")):
+        pytest.skip("datasets/ not present — run examples/fetch_datasets.sh first")
     for ds in ("healthcare", "nyc-taxi", "fiction-retail"):
         for fn in ("create_db.py", "add_lineage.py", "add_metadata.py", "ingest.yaml"):
             if fn == "create_db.py" and ds == "fiction-retail":
