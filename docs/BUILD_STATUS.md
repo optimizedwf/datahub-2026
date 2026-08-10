@@ -39,8 +39,7 @@ Rebuild script: `docs/DEMO_SCRIPT.md` (ffmpeg concat filter, macOS `say` TTS).
 
 1. **Devpost**: paste `docs/DEVPOST_SUBMISSION.md` (rewritten for full vision).
 2. **YouTube**: upload `docs/demo_2026_submission.mp4` (**2:59** — under the 3-min rule), link in Devpost.
-3. **Repo choice**: `datahub-2026-mfg` (superset, this build) vs `datahub-2026-public`
-   (frozen fallback) — mfg is the entry.
+3. **Repo**: **https://github.com/optimizedwf/datahub-2026** (PUBLIC, pushed 2026-08-09) — the mfg build, full harness. Contribute-back PR #96 open upstream.
 4. Deadline: **2026-08-10 17:00 EDT** (~42h remaining).
 
 ## Isolation verified

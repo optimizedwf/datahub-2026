@@ -104,6 +104,6 @@ DataHub / datahub-agent-context · SQLite · Python · Docker · any [OI]-compat
 ## Checklist before submit
 
 - [x] Demo video (`docs/demo_2026_submission.mp4`, **2:59**, two-domain story — under the 3-min rule; 3:41 cut to fit), professional TTS voiceover (edge-tts Christopher): Factory Shop Graph → No-Bid Agent → Quotes/Safety → PartSnap → SQL evidence 0.95 vs 0.70; real UI + terminal + TTS)
-- [x] GitHub repo — `optimizedwf/datahub-2026` (Apache-2.0, README, Makefile, tests, CI); upstream PR **#96**
+- [x] GitHub repo — `github.com/optimizedwf/datahub-2026` (PUBLIC — live) (Apache-2.0, README, Makefile, tests, CI); upstream PR **#96**
 - [x] Contribute-back PR — `datahub-project/analytics-agent #96`
 - [x] `EVAL.json` metadata 0.95 (frozen 2026-08-05); mfg eval 22/22 PASS

@@ -1,5 +1,7 @@
 # DataHub as a Factory's Institutional Memory
 
+**Repo:** https://github.com/optimizedwf/datahub-2026 (public, Apache-2.0) · **Contribute-back PR:** datahub-project/analytics-agent #96
+
 **Category #2 — Metadata-aware Code Generation**
 
 > DataHub becomes a factory's institutional memory — every part, machine, and
