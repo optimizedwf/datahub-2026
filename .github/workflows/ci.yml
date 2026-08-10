@@ -14,7 +14,9 @@ jobs:
           python-version: "3.11"
       - name: Lint (py_compile)
         run: python3 -m py_compile src/agent.py evals/benchmark.py mfg/scripts/*.py
+      - name: Install test deps
+        run: python3 -m pip install --quiet pytest
       - name: Tests
-        run: python3 -m pytest tests/ -q
+        run: python3 -m pytest tests/ -q -p no:warnings
       - name: Dataset scripts parse
         run: bash -n examples/*.sh
