@@ -101,10 +101,61 @@ def get_graph():
     client = DataHubClient(server=server, token="")
     return client, DataHubContext(client)
 
-def load_fixture(urn: str) -> dict:
-    """Load fixture data from local vendored files (deterministic source)."""
+
+def load_fixture(urn: str, client=None, ctx=None) -> dict:
+    """Load fixture data from the live DataHub graph (Dataset.custom_properties),
+    falling back to local vendored JSON if the graph is unreachable."""
     ROOT = Path(__file__).resolve().parent.parent.parent
     name = urn.split("rfq.")[-1].rstrip(",PROD)")
+
+    # 1) Graph-first: read customProperties from the live entity
+    if client is not None:
+        try:
+            ent = client.entities.get(urn)
+            props = dict(getattr(ent, "custom_properties", {}) or {})
+            if props.get("material"):
+                fx = {
+                    "fixture_id": name,
+                    "material": props.get("material", ""),
+                    "quantity": props.get("quantity"),
+                    "finish": props.get("finish", ""),
+                    "tolerance": props.get("tolerance", ""),
+                }
+                # missing_info / dfm_risks are JSON strings in the graph
+                if props.get("missing_info"):
+                    try: fx["missing_info"] = json.loads(props["missing_info"])
+                    except Exception: fx["missing_info"] = [props["missing_info"]]
+                else:
+                    fx["missing_info"] = []
+                if props.get("dfm_risks"):
+                    try: fx["expected_dfm_risks"] = json.loads(props["dfm_risks"])
+                    except Exception: fx["expected_dfm_risks"] = []
+                else:
+                    fx["expected_dfm_risks"] = []
+                # capability class (flattened capability_* keys)
+                cc = {}
+                for k, v in props.items():
+                    if k.startswith("capability_"):
+                        key = k[len("capability_"):]
+                        if isinstance(v, str) and v.startswith("["):
+                            try: v = json.loads(v)
+                            except Exception: pass
+                        cc[key] = v
+                if cc:
+                    fx["capability_class"] = cc
+                # keep expected_* fields for parity with local fixtures
+                for k in ("expected_quote_decision", "expected_setup_count", "expected_setup_class", "dfm_risk_count"):
+                    if props.get(k) is not None:
+                        v = props[k]
+                        if isinstance(v, str) and v.startswith("["):
+                            try: v = json.loads(v)
+                            except Exception: pass
+                        fx[k] = v
+                return fx
+        except Exception as e:
+            print(f"  (graph read failed for {name}: {e.__class__.__name__}: {e}; falling back to local)")
+
+    # 2) Local fallback
     for d in ("rfq", "kernels"):
         p = ROOT / "mfg" / "fixtures" / d / f"{name}.json"
         if p.exists():
@@ -131,19 +182,24 @@ def main():
     else:
         ap.error("need target or --all")
 
+    client = None
+    if not args.dry_run:
+        client, _ctx = get_graph()  # graph-first reads need the client
+
     results = []
     for tid in targets:
-        fp = (ROOT / "mfg" / "fixtures" / "rfq" / f"{tid}.json")
-        if not fp.exists():
-            fp = (ROOT / "mfg" / "fixtures" / "kernels" / f"{tid}.json")
-        if not fp.exists():
+        urn = f"urn:li:dataset:(urn:li:dataPlatform:mfg,rfq.{tid},PROD)"
+        try:
+            fixture = load_fixture(urn, client=client)
+        except FileNotFoundError:
             print(f"SKIP {tid}: no fixture")
             continue
-        fixture = json.loads(fp.read_text())
         dec = decide(fixture)
-        urn = f"urn:li:dataset:(urn:li:dataPlatform:mfg,rfq.{tid},PROD)"
         results.append({"urn": urn, "fixture": tid, **dec})
         print(f"{tid:42s} -> {dec['decision']:12s} [{dec['confidence']}] {dec['reason'][:70]}")
+
+    if not args.dry_run and client is None:
+        client, _ctx = get_graph()
 
     if not args.dry_run:
         print("\n-- write-back --")
